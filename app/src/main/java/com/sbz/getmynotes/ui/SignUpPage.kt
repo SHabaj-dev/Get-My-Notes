@@ -27,40 +27,22 @@ class SignUpPage : AppCompatActivity() {
         binding.tvLogin.setOnClickListener { onBackPressed() }
 
         binding.btnSignUp.setOnClickListener {
-            mEmail = binding.email.text.toString()
-            mPassword = binding.passwordSignUp.text.toString()
-            mConfirmPassword = binding.confirmPass.text.toString()
-            mUserName = binding.tvUserName.text.toString()
-
-            if (mEmail.isEmpty()) {
-                Toast.makeText(this@SignUpPage, "Email can't be empty!!", Toast.LENGTH_SHORT).show()
+            try {
+                mEmail = binding.email.text.toString()
+                mPassword = binding.passwordSignUp.text.toString()
+                mConfirmPassword = binding.confirmPass.text.toString()
+                mUserName = binding.tvUserName.text.toString()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            if (mPassword.isEmpty()) {
-                Toast.makeText(this@SignUpPage, "Password can't be empty!!", Toast.LENGTH_SHORT)
+
+            if (mEmail.isEmpty() || mPassword.isEmpty() || mConfirmPassword.isEmpty() || mUserName.isEmpty()) {
+                Toast.makeText(this, "Please Fill the Credentials Carefully", Toast.LENGTH_SHORT)
                     .show()
-            }
-            if (mConfirmPassword.isEmpty()) {
-                Toast.makeText(
-                    this@SignUpPage,
-                    "Confirm Password can't be empty!!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            if (mUserName.isEmpty()) {
-                Toast.makeText(this@SignUpPage, "User Name can't be empty!!", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
-            if (mPassword.equals(mConfirmPassword)) {
+            } else if (!mPassword.equals(mConfirmPassword)) {
+                Toast.makeText(this, "Password didn't match.", Toast.LENGTH_SHORT).show()
+            }else{
                 createUser(mEmail, mPassword, mUserName)
-            } else {
-                Toast.makeText(
-                    this@SignUpPage,
-                    "Password did not Match Please Check",
-                    Toast.LENGTH_SHORT
-                ).show()
-
             }
         }
     }
@@ -74,16 +56,16 @@ class SignUpPage : AppCompatActivity() {
                         .show()
 
                     val user = mAuth.currentUser
-                    if(user != null){
+                    if (user != null) {
                         val profileUpdate = UserProfileChangeRequest.Builder()
                             .setDisplayName(userName)
                             .build()
 
                         user.updateProfile(profileUpdate)
                             .addOnCompleteListener { profileTask ->
-                                if(profileTask.isSuccessful){
+                                if (profileTask.isSuccessful) {
                                     Log.d("USER NAME SAVED", userName)
-                                }else{
+                                } else {
                                     Log.d("USER NAME NOT SAVED", userName)
                                 }
                             }

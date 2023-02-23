@@ -29,8 +29,12 @@ class LoginPage : AppCompatActivity() {
 
 
         binding.btnLogin.setOnClickListener {
-            mEmail = binding.email.text.toString()
-            mPassword = binding.password.toString()
+            try{
+                mEmail = binding.email.text.toString()
+                mPassword = binding.password.text.toString()
+            }catch(e: Exception){
+                e.printStackTrace()
+            }
             if (mEmail.isEmpty()) {
                 Toast.makeText(this, "Please Enter Your Email", Toast.LENGTH_SHORT).show()
             }

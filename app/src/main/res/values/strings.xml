@@ -16,4 +16,7 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="don_t_hava_an_account">Don\'t Hava an account?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="user_name">User Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_a_user">Already a user?</string>
 </resources>

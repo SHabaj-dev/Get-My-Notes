@@ -1,8 +1,9 @@
-package com.sbz.getmynotes
+package com.sbz.getmynotes.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+<<<<<<< HEAD:app/src/main/java/com/sbz/getmynotes/ForgotPassword.kt
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
@@ -55,5 +56,13 @@ class ForgotPassword : AppCompatActivity() {
         }
 
 
+=======
+import com.sbz.getmynotes.R
+
+class VerifyOtp : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_verify_otp)
+>>>>>>> main:app/src/main/java/com/sbz/getmynotes/ui/VerifyOtp.kt
     }
 }

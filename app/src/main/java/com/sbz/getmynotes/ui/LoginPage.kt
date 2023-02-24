@@ -1,9 +1,9 @@
 package com.sbz.getmynotes.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.sbz.getmynotes.MainActivity
@@ -45,6 +45,7 @@ class LoginPage : AppCompatActivity() {
             }
         }
 
+
     }
 
 
@@ -65,11 +66,10 @@ class LoginPage : AppCompatActivity() {
 
 
     private fun navToForgotPasswordPage() {
-        /*Implement Code to change activity to forgot password*/
+        startActivity(Intent(this, ForgotPassword::class.java))
     }
 
     private fun navToSignUpPage() {
-        val intent = Intent(this@LoginPage, SignUpPage::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, SignUpPage::class.java))
     }
 }

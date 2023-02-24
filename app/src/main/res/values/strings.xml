@@ -26,4 +26,6 @@
     <string name="please_enter_otp_sent_on">Please Enter OTP sent on</string>
     <string name="support_mail_com">support@mail.com</string>
     <string name="verify">Verify</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
 </resources>

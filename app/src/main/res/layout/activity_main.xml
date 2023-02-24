@@ -9,6 +9,49 @@
         android:background="@color/white"
         tools:context=".MainActivity">
 
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/background_top_bar"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_user_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/person_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/hi"
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/user_name"
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold|italic"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:padding="2dp"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

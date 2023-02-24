@@ -14,14 +14,6 @@
         android:theme="@style/Theme.GetMyNotes"
         tools:targetApi="31">
         <activity
-            android:name=".ui.VerifyOtp"
-            android:exported="false"
-            android:theme="@style/Theme.CustomTheme"/>
-        <activity
-            android:name=".ui.MakeSelection"
-            android:exported="false"
-            android:theme="@style/Theme.CustomTheme"/>
-        <activity
             android:name=".ui.ForgotPassword"
             android:theme="@style/Theme.CustomTheme"
             android:exported="false" />

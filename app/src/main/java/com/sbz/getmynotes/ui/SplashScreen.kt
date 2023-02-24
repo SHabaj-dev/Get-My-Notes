@@ -1,4 +1,4 @@
-package com.sbz.getmynotes
+package com.sbz.getmynotes.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import com.sbz.getmynotes.R
 
 class SplashScreen : AppCompatActivity() {
     private val TIME_OUT = 2000

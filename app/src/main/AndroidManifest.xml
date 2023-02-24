@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,6 +22,13 @@
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
+            android:name=".ui.SignUpPage"
+            android:exported="false"
+            android:theme="@style/Theme.CustomTheme"/>
+        <activity
+            android:name=".ui.LoginPage"
+            android:exported="false"
+            android:theme="@style/Theme.CustomTheme" />
         <activity
             android:name=".LoginPage"
             android:exported="false"
@@ -30,7 +39,7 @@
             android:label="@string/title_activity_splash_screen"
             android:theme="@style/Theme.CustomTheme" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".ui.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.CustomTheme">
             <intent-filter>

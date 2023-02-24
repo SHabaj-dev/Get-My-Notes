@@ -6,18 +6,26 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
+import com.sbz.getmynotes.MainActivity
 import com.sbz.getmynotes.R
 
 class SplashScreen : AppCompatActivity() {
     private val TIME_OUT = 2000
+    private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         hideActionAndNavBar()
+        mAuth = FirebaseAuth.getInstance()
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreen, LoginPage::class.java)
-            startActivity(intent)
-            finish()
+            if(mAuth.currentUser != null){
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }else{
+                startActivity(Intent(this, LoginPage::class.java))
+                finish()
+            }
         }, TIME_OUT.toLong())
     }
 

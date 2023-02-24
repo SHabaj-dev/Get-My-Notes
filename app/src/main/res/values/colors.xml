@@ -10,4 +10,12 @@
     <color name="background_color">#615F5F</color>
     <color name="blue">#066BD1</color>
     <color name="magenta">#E83535</color>
+    <color name="lightwhite">#b6d0e8</color>
+
+    <color name="transparent"> #00FFFFFF</color>
+
+    <color name="accent">  #9cacd8</color>
+    <color name="yellow">  #FFDE03</color>
+
+
 </resources>

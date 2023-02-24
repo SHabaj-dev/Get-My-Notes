@@ -1,7 +1,8 @@
-package com.sbz.getmynotes
+package com.sbz.getmynotes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sbz.getmynotes.R
 
 class VerifyOtp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -3,95 +3,122 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
 
-    </data>
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".VerifyOtp">
+        android:background="@color/white">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/back_verify_otp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_msg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/berlings"
+            android:text="@string/verify_otp"
+            android:textColor="@color/black"
+            android:textSize="60sp"
+            app:layout_constraintStart_toStartOf="@id/back_verify_otp"
+            app:layout_constraintTop_toBottomOf="@id/back_verify_otp" />
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="30dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_msg1">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/ic_close"
-                app:tint="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:includeFontPadding="false"
-                android:text="@string/otp_code"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="100sp"
-                android:textStyle="bold"
-
-
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:includeFontPadding="false"
-                android:text="Verification"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:includeFontPadding="false"
-                android:text="Enter one time password sent on support@gmail.com"
-
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <com.chaos.view.PinView
-                style="@style/PinWidget.PinView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:cursorVisible="true"
-                android:inputType="number"
-                android:itemBackground="@color/lightwhite"
-                app:cursorColor="@color/black"
-                app:hideLineWhenFilled="true"
-                app:itemCount="6"
-                app:itemRadius="5dp"
-                app:itemWidth="50dp"
-                app:lineColor="@color/accent"></com.chaos.view.PinView>
-
-            <Button
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/yellow"
-                android:text="Verify Code "
-                android:textColor="@color/black" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/info_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/please_enter_otp_sent_on"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/otp_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/support_mail_com"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/info_1" />
 
 
-        </LinearLayout>
+                <com.chaos.view.PinView
+                    android:id="@+id/pinView_otp"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:cursorVisible="true"
+                    android:inputType="number"
+                    android:itemBackground="@color/white"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    app:cursorColor="@color/black"
+                    app:itemCount="6"
+                    app:itemHeight="45dp"
+                    app:itemRadius="5dp"
+                    app:itemWidth="45dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/otp_email"
+                    app:lineColor="@color/background_color" />
 
-    </ScrollView>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_verify_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/card_background"
+                    android:text="@string/verify"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/pinView_otp"
+                    app:layout_constraintTop_toBottomOf="@id/pinView_otp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

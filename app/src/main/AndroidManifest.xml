@@ -14,11 +14,23 @@
         android:theme="@style/Theme.GetMyNotes"
         tools:targetApi="31">
         <activity
+            android:name=".VerifyOtp"
+            android:exported="false" />
+        <activity
+            android:name=".MakeSelection"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
             android:name=".ui.SignUpPage"
             android:exported="false"
             android:theme="@style/Theme.CustomTheme"/>
         <activity
             android:name=".ui.LoginPage"
+            android:exported="false"
+            android:theme="@style/Theme.CustomTheme" />
+        <activity
+            android:name=".LoginPage"
             android:exported="false"
             android:theme="@style/Theme.CustomTheme" />
         <activity

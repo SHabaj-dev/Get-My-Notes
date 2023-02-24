@@ -41,14 +41,11 @@ class ForgotPassword : AppCompatActivity() {
                         //resetCode = task.result?.getString("email")
                         Toast.makeText(
                             this@ForgotPassword,
-                            "Email sent successfully to reset your password",
+                            "An Email with Password reset link is sent.",
                             Toast.LENGTH_SHORT
                         )
                             .show()
-                        //finish()
-                        //start otp activity
-                        val intent = Intent(this@ForgotPassword, VerifyOtp::class.java)
-                        startActivity(intent)
+                        finish()
 
                     } else {
                         Toast.makeText(

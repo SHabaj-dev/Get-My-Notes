@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
+        android:background="@color/white"
         tools:context=".ui.SignUpPage">
 
         <ImageView
@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/back_btn"/>
+            android:src="@drawable/ic_back_black"/>
 
         <TextView
             android:id="@+id/tv_msg1"
@@ -31,7 +31,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textAlignment="textStart"
             android:padding="5dp"
             android:fontFamily="@font/berlings"
@@ -45,18 +45,20 @@
             app:layout_constraintTop_toBottomOf="@id/tv_msg1"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="15dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:hint="@string/email"
@@ -81,7 +83,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_uName"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:hint="@string/user_name"
@@ -105,7 +107,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_pass"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:hint="@string/password"
@@ -132,7 +134,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_conf_pass"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:hint="@string/confirm_password"
@@ -188,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/already_a_user"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="16sp"/>
 
             <TextView
@@ -197,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/log_in"
                 android:layout_marginStart="5dp"
-                android:textColor="@color/magenta"
+                android:textColor="@color/blue"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 

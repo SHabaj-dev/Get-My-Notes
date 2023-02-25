@@ -41,6 +41,12 @@ class SignUpPage : AppCompatActivity() {
                     .show()
             } else if (!mPassword.equals(mConfirmPassword)) {
                 Toast.makeText(this, "Password didn't match.", Toast.LENGTH_SHORT).show()
+            } else if (mPassword.length < 8) {
+                Toast.makeText(
+                    this,
+                    "Password must be at least 8 characters long",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 createUser(mEmail, mPassword, mUserName)
             }

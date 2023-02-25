@@ -1,18 +1,18 @@
 package com.sbz.getmynotes
 
-import android.animation.AnimatorInflater
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import android.widget.Toast
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.google.firebase.auth.FirebaseAuth
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.sbz.getmynotes.adapter.CourseListAdapter
 import com.sbz.getmynotes.databinding.ActivityMainBinding
+import com.sbz.getmynotes.model.CourseList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,6 +25,22 @@ class MainActivity : AppCompatActivity() {
 
 
         getUserName()
+
+        val courseList = mutableListOf(
+            CourseList("MCA"),
+            CourseList("B,Tech(CSE)"),
+            CourseList("B,Tech(ME)"),
+            CourseList("B,Tech(EE)"),
+            CourseList("BE"),
+        )
+
+        binding.rvCourseList.setHasFixedSize(true)
+        binding.rvCourseList.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
+        var adpater = CourseListAdapter(this, courseList)
+        binding.rvCourseList.adapter = adpater
+
+
+
 
         binding.homeLayout.setOnClickListener {
             if (selectedTab != 1) {
@@ -105,11 +121,11 @@ class MainActivity : AppCompatActivity() {
             // FirebaseUser.getIdToken() instead.
             val uid = it.uid.toString()
 
-            Log.d("SBZ_USER_NAME", mUserName)
-            Log.d("SBZ_EMAIL", email)
-            Log.d("SBZ_PHOTO_URL", photoUrl)
-            Log.d("SBZ_EMAIL_VERIFIED", emailVerified)
-            Log.d("SBZ_UID", uid)
+//            Log.d("SBZ_USER_NAME", mUserName)
+//            Log.d("SBZ_EMAIL", email)
+//            Log.d("SBZ_PHOTO_URL", photoUrl)
+//            Log.d("SBZ_EMAIL_VERIFIED", emailVerified)
+//            Log.d("SBZ_UID", uid)
         }
         binding.tvUserName.text = mUserName
     }

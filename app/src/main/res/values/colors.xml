@@ -22,6 +22,7 @@
 
     <color name="home_20">#331194AA</color>
     <color name="settings_20">#33AE7E0F</color>
+    <color name="logout_btn_color">#80E81010</color>
 
 
 </resources>

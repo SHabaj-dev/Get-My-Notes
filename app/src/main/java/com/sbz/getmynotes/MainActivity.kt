@@ -4,46 +4,32 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.sbz.getmynotes.adapter.CourseListAdapter
 import com.sbz.getmynotes.databinding.ActivityMainBinding
-import com.sbz.getmynotes.model.CourseList
+import com.sbz.getmynotes.ui.MainFragment
+import com.sbz.getmynotes.ui.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var selectedTab = 1
+    private val mainFragment = MainFragment()
+    private val settingsFragment = SettingsFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         window.statusBarColor = this.resources.getColor(R.color.home_20)
 
-
-        getUserName()
-
-        val courseList = mutableListOf(
-            CourseList("MCA"),
-            CourseList("B,Tech(CSE)"),
-            CourseList("B,Tech(ME)"),
-            CourseList("B,Tech(EE)"),
-            CourseList("BE"),
-        )
-
-        binding.rvCourseList.setHasFixedSize(true)
-        binding.rvCourseList.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
-        var adpater = CourseListAdapter(this, courseList)
-        binding.rvCourseList.adapter = adpater
-
-
-
+        setFirstFragment()
 
         binding.homeLayout.setOnClickListener {
             if (selectedTab != 1) {
+
+                getUserName()
+                setFirstFragment()
 
                 binding.tvSettings.visibility = View.GONE
                 binding.ivSettings.setImageResource(R.drawable.settings_icon)
@@ -74,12 +60,18 @@ class MainActivity : AppCompatActivity() {
         binding.settingsLayout.setOnClickListener {
             if (selectedTab != 2) {
 
+                setSecondFragment()
+
+//                binding.tvUserName.text = "Profile"
+//                binding.hiMsg.visibility = View.GONE
+//                binding.ivUserProfile.setImageResource(R.drawable.arrow_back)
+
                 binding.tvHome.visibility = View.GONE
                 binding.ivHome.setImageResource(R.drawable.home_icon)
                 binding.homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
 
                 binding.tvSettings.visibility = View.VISIBLE
-                binding.ivSettings.setImageResource(R.drawable.settings_icon_slected)
+                binding.ivSettings.setImageResource(R.drawable.settings_icon)
                 binding.settingsLayout.setBackgroundResource(R.drawable.round_back_settings_100)
 
                 val scaleAnimation = ScaleAnimation(
@@ -100,6 +92,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun setSecondFragment() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_fragment, settingsFragment)
+            commit()
+        }
+        binding.ivUserProfile.setOnClickListener {
+            setFirstFragment()
+        }
+    }
+
+    private fun setFirstFragment() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_fragment, mainFragment)
+            commit()
+        }
     }
 
 
@@ -128,6 +137,8 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("SBZ_UID", uid)
         }
         binding.tvUserName.text = mUserName
+        binding.hiMsg.visibility = View.VISIBLE
+        binding.ivUserProfile.setImageResource(R.drawable.person_icon)
     }
 
 }

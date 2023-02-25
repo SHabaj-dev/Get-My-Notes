@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.sbz.getmynotes.MainActivity
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.databinding.ActivityLoginPageBinding
@@ -18,6 +20,7 @@ class LoginPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_page)
+        mAuth = Firebase.auth
 
         binding.tvSignUp.setOnClickListener {
             navToSignUpPage()
@@ -48,6 +51,16 @@ class LoginPage : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        val currentUser = mAuth.currentUser
+        if(currentUser != null){
+            val intent = Intent(this@LoginPage, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+        }
+    }
+
 
     private fun loginUser(e_mail: String, password: String) {
         mAuth = FirebaseAuth.getInstance()
@@ -58,7 +71,7 @@ class LoginPage : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Login Failed!!\n Please Try Again.", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Authentication Failed!!\n Please Try Again.", Toast.LENGTH_SHORT)
                         .show()
                 }
             }

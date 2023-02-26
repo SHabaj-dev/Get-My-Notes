@@ -1,12 +1,20 @@
 package com.sbz.getmynotes.ui
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.sbz.getmynotes.MainActivity
 import com.sbz.getmynotes.R
@@ -17,10 +25,15 @@ class LoginPage : AppCompatActivity() {
     private lateinit var mEmail: String
     private lateinit var mPassword: String
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_page)
         mAuth = Firebase.auth
+
+
+
+
 
         binding.tvSignUp.setOnClickListener {
             navToSignUpPage()
@@ -32,17 +45,24 @@ class LoginPage : AppCompatActivity() {
 
 
         binding.btnLogin.setOnClickListener {
-            try{
+
+//            validateData()
+            binding.pbLogin.visibility = View.VISIBLE
+            makeButtonDisable(binding.btnLogin)
+
+            try {
                 mEmail = binding.email.text.toString()
                 mPassword = binding.password.text.toString()
-            }catch(e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if (mEmail.isEmpty()) {
                 Toast.makeText(this, "Please Enter Your Email", Toast.LENGTH_SHORT).show()
+                binding.pbLogin.visibility = View.GONE
             }
             if (mPassword.isEmpty()) {
                 Toast.makeText(this, "Password can't be empty!!!", Toast.LENGTH_SHORT).show()
+                binding.pbLogin.visibility = View.GONE
             } else {
                 loginUser(mEmail, mPassword)
             }
@@ -51,14 +71,40 @@ class LoginPage : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = mAuth.currentUser
-        if(currentUser != null){
-            val intent = Intent(this@LoginPage, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-        }
+    private fun makeButtonDisable(btnLogin: AppCompatButton) {
+        btnLogin.isEnabled = false
+//        btnLogin.setBackgroundColor(Color.LTGRAY)
+//        btnLogin.setTextColor(Color.WHITE)
+    }
+
+
+    private fun checkUserType() {
+        val firebaseUser = mAuth.currentUser!!
+
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseUser.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userType = snapshot.child("userType").value
+
+                    if (userType == "admin") {
+
+                        startActivity(Intent(this@LoginPage, AdminDashboard::class.java))
+                        finish()
+
+                    } else if (userType == "user") {
+                        startActivity(Intent(this@LoginPage, MainActivity::class.java))
+                        finish()
+                    }
+
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
 
 
@@ -67,12 +113,14 @@ class LoginPage : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(e_mail, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this@LoginPage, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+//                    val intent = Intent(this@LoginPage, MainActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+                    checkUserType()
                 } else {
                     Toast.makeText(this, "Authentication Failed!!\n Please Try Again.", Toast.LENGTH_SHORT)
                         .show()
+                    binding.pbLogin.visibility = View.GONE
                 }
             }
     }

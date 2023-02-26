@@ -19,9 +19,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val updatedUserName = view.findViewById<TextView>(R.id.tv_user_name_settings)
         val updateButton = view.findViewById<AppCompatButton>(R.id.btn_update_profile)
         val logOutButton = view.findViewById<AppCompatButton>(R.id.btn_logout)
-        val newUName = updatedUserName.text.toString()
+
 
         updateButton.setOnClickListener {
+            val newUName = updatedUserName.text.toString()
             updateUserInfo(newUName)
         }
 

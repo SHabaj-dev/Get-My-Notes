@@ -32,4 +32,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="course_name">Course Name</string>
+    <string name="university_collage_name">University/Collage Name</string>
+    <string name="want_to_change_password">Want to Change Password?</string>
+    <string name="click_here">Click Here.</string>
+    <string name="log_out">Log Out</string>
+    <string name="update">Update</string>
 </resources>

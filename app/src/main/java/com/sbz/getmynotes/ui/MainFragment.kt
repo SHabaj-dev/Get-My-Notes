@@ -39,7 +39,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         //data = ArrayList()
         courseList = ArrayList()
         myAdapter = CourseListAdapter(requireContext(),courseList)
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
         recyclerView.adapter = myAdapter
         getDataFromFirebase() // Call this function to get data from Firebase and update the adapter
     }

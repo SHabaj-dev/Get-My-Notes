@@ -28,39 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         setFirstFragment()
         binding.tvSettings.visibility = View.GONE
-        binding.hiMsg.visibility=View.GONE
-        binding.ivUserProfile.visibility=View.GONE
-        binding.tvUserName.visibility=View.GONE
         binding.tvAllCourse.visibility=View.VISIBLE
 
-
-        //save the original params
-        /*val originalParams1 = binding.ivUserProfile.layoutParams
-        val originalParams2 = binding.hiMsg.layoutParams
-        val originalParams3=binding.tvUserName.layoutParams
-
-
-        //
-        val params1 = binding.ivUserProfile.layoutParams as LinearLayout.LayoutParams
-        val params2 = binding.hiMsg.layoutParams as LinearLayout.LayoutParams
-        val params3=binding.tvUserName.layoutParams as LinearLayout.LayoutParams
-
-        params1.weight = 0.0f
-        //params1.width = 0
-        params2.weight = 0.0f
-       // params2.width = 0
-        params3.weight = 0.0f
-       // params3.width = 0
-
-        binding.ivUserProfile.layoutParams = params1
-        binding.hiMsg.layoutParams = params2
-        binding.tvUserName.layoutParams = params3
-        binding.hiMsg.visibility=View.GONE
-        binding.ivUserProfile.visibility=View.GONE
-        binding.tvUserName.visibility=View.GONE
-
-
-        binding.tvAllCourse.visibility=View.VISIBLE*/
 
         binding.homeLayout.setOnClickListener {
             if (selectedTab != 1) {
@@ -69,32 +38,7 @@ class MainActivity : AppCompatActivity() {
                 setFirstFragment()
 
                 binding.tvSettings.visibility = View.GONE
-                binding.hiMsg.visibility=View.GONE
-                binding.ivUserProfile.visibility=View.GONE
-                binding.tvUserName.visibility=View.GONE
                 binding.tvAllCourse.visibility=View.VISIBLE
-                /*val params4 = binding.ivUserProfile.layoutParams as LinearLayout.LayoutParams
-                val params5 = binding.hiMsg.layoutParams as LinearLayout.LayoutParams
-                val params6=binding.tvUserName.layoutParams as LinearLayout.LayoutParams
-
-                params4.weight = 0.0f
-               // params1.width = 0
-                params5.weight = 0.0f
-               // params2.width = 0
-                params6.weight = 0.0f
-                //params3.width = 0
-
-                binding.ivUserProfile.layoutParams = params1
-                binding.hiMsg.layoutParams = params2
-                binding.tvUserName.layoutParams = params3
-
-                binding.hiMsg.visibility=View.GONE
-                binding.ivUserProfile.visibility=View.GONE
-                binding.tvUserName.visibility=View.GONE
-                binding.tvAllCourse.visibility=View.VISIBLE*/
-
-
-
 
                 binding.ivSettings.setImageResource(R.drawable.settings_icon)
                 binding.settingsLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
@@ -125,14 +69,7 @@ class MainActivity : AppCompatActivity() {
             if (selectedTab != 2) {
 
                 setSecondFragment()
-
-//                binding.tvUserName.text = "Profile"
-//                binding.hiMsg.visibility = View.GONE
-//                binding.ivUserProfile.setImageResource(R.drawable.arrow_back)
                 binding.tvSettings.visibility = View.VISIBLE
-                binding.hiMsg.visibility=View.VISIBLE
-                binding.ivUserProfile.visibility=View.VISIBLE
-                binding.tvUserName.visibility=View.VISIBLE
                 binding.tvAllCourse.visibility=View.GONE
 
                 //setting the original params
@@ -177,9 +114,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fl_fragment, settingsFragment)
             commit()
         }
-        binding.ivUserProfile.setOnClickListener {
-            setFirstFragment()
-        }
     }
 
     private fun setFirstFragment() {
@@ -214,9 +148,6 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("SBZ_EMAIL_VERIFIED", emailVerified)
 //            Log.d("SBZ_UID", uid)
         }
-        binding.tvUserName.text = mUserName
-        binding.hiMsg.visibility = View.VISIBLE
-        binding.ivUserProfile.setImageResource(R.drawable.person_icon)
     }
 
 }

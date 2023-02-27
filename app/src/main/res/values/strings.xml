@@ -37,4 +37,12 @@
     <string name="click_here">Click Here.</string>
     <string name="log_out">Log Out</string>
     <string name="update">Update</string>
+    <string name="dashboard_admin">Dashboard Admin</string>
+    <string name="admin_example_com">admin@example.com</string>
+    <string name="admin_dashboard">Admin Dashboard</string>
+    <string name="add_subject">+Add Subject</string>
+    <string name="add_subject_1">Add Subject</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="submit">Submit</string>
+    <string name="search_courses">Search Courses</string>
 </resources>

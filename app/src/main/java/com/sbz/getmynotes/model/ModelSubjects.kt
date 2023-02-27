@@ -1,6 +1,7 @@
 package com.sbz.getmynotes.model
 
-data class CourseList(
+data class ModelSubjects(
+
     var id : String = "",
     var subject : String = "",
     var timestamp : Long = 0,

@@ -29,6 +29,6 @@ class CourseListAdapter(val context: Context, val courseList: List<CourseList>) 
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
 
-        holder.courseName.text = courseList[position].courseName
+        holder.courseName.text = courseList[position].subject
     }
 }

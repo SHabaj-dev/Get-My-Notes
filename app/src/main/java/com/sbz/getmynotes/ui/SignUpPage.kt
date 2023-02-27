@@ -1,12 +1,12 @@
 package com.sbz.getmynotes.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.databinding.ActivitySignUpPageBinding
 
@@ -18,6 +18,7 @@ class SignUpPage : AppCompatActivity() {
     private lateinit var mPassword: String
     private lateinit var mUserName: String
     private lateinit var mConfirmPassword: String
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up_page)
@@ -28,10 +29,10 @@ class SignUpPage : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             try {
-                mEmail = binding.email.text.toString()
-                mPassword = binding.passwordSignUp.text.toString()
-                mConfirmPassword = binding.confirmPass.text.toString()
-                mUserName = binding.tvUserName.text.toString()
+                mEmail = binding.email.text.toString().trim()
+                mPassword = binding.passwordSignUp.text.toString().trim()
+                mConfirmPassword = binding.confirmPass.text.toString().trim()
+                mUserName = binding.tvUserName.text.toString().trim()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -48,6 +49,12 @@ class SignUpPage : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
+
+                progressDialog = ProgressDialog(this)
+                progressDialog.setTitle("Please Wait")
+                progressDialog.setCanceledOnTouchOutside(false)
+
+
                 createUser(mEmail, mPassword, mUserName)
             }
         }
@@ -58,26 +65,7 @@ class SignUpPage : AppCompatActivity() {
         mAuth.createUserWithEmailAndPassword(e_mail, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this@SignUpPage, "Registration Successful.", Toast.LENGTH_SHORT)
-                        .show()
-
-                    val user = mAuth.currentUser
-                    if (user != null) {
-                        val profileUpdate = UserProfileChangeRequest.Builder()
-                            .setDisplayName(userName)
-                            .build()
-
-                        user.updateProfile(profileUpdate)
-                            .addOnCompleteListener { profileTask ->
-                                if (profileTask.isSuccessful) {
-                                    Log.d("USER NAME SAVED", userName)
-                                } else {
-                                    Log.d("USER NAME NOT SAVED", userName)
-                                }
-                            }
-                    }
-
-                    onBackPressed()
+                    updateUserInfo()
                 } else {
                     Toast.makeText(
                         this@SignUpPage,
@@ -85,6 +73,37 @@ class SignUpPage : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+    }
+
+    private fun updateUserInfo() {
+        progressDialog.setMessage("Saving User info...")
+
+        val timeStamp = System.currentTimeMillis()
+
+        val uid = mAuth.uid
+
+        val hashMap: HashMap<String, Any?> = HashMap()
+        hashMap["uid"] = uid
+        hashMap["email"] = mEmail
+        hashMap["userName"] = mUserName
+        hashMap["profileImage"] = ""
+        hashMap["userType"] = "user"
+        hashMap["timeStamp"] = timeStamp
+
+
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(uid!!)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this, "Saving User Info Success", Toast.LENGTH_SHORT).show()
+                onBackPressed()
+
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed Saving User Info", Toast.LENGTH_SHORT).show()
+
             }
     }
 

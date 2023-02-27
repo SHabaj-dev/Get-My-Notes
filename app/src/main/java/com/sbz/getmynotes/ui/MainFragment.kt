@@ -28,44 +28,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var courseList: ArrayList<CourseList>
     private lateinit var data: ArrayList<CourseList>
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        courseList = ArrayList()
-        val ref = FirebaseDatabase.getInstance().getReference("Subjects")
-        ref.addValueEventListener(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                courseList.clear()
-                for(ds in snapshot.children){
-                    val course = ds.getValue(CourseList::class.java)
-                    course?.let{courseList.add(it)}
-                }
-//                myAdapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        }
-        )
-
-
-//        val courseList = mutableListOf(
-//            CourseList("MCA"),
-//            CourseList("B,Tech(CSE)"),
-//            CourseList("B,Tech(ME)"),
-//            CourseList("B,Tech(EE)"),
-//            CourseList("BE"),
-//        )
-
-        recyclerView = view.findViewById(R.id.rv_course_name)
-        recyclerView.hasFixedSize()
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
-        val myAdpater = CourseListAdapter(requireContext(), courseList)
-        recyclerView.adapter = myAdpater
-
-    }*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         recyclerView = view.findViewById(R.id.rv_course_name)

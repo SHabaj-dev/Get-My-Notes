@@ -1,7 +1,10 @@
 package com.sbz.getmynotes.ui
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Display.Mode
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -36,30 +39,30 @@ class AdminDashboard : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         checkUser()
 
-        val ref = FirebaseDatabase.getInstance().getReference("Subjects")
-        ref.addValueEventListener(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                subjectList.clear()
-                for(ds in snapshot.children){
-                    val subject = ds.getValue(ModelSubjects::class.java)
-                    subject?.let{subjectList.add(it)}
-                }
-//                myAdapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        }
-        )
-
         recyclerView = findViewById(R.id.rv_course_name)
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
         myAdapter = SubjectListAdapter(this, subjectList)
         recyclerView.adapter = myAdapter
-        myAdapter.notifyDataSetChanged()
+
+        getDataFromFirebase()
+//        val ref = FirebaseDatabase.getInstance().getReference("Subjects")
+//        ref.addValueEventListener(object : ValueEventListener {
+//
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                subjectList.clear()
+//                for(ds in snapshot.children){
+//                    val subject = ds.getValue(ModelSubjects::class.java)
+//                    subject?.let{subjectList.add(it)}
+//                }
+////                myAdapter.notifyDataSetChanged()
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//        }
+//        )
 
         binding.btnLogoutAdmin.setOnClickListener {
             mAuth.signOut()
@@ -74,6 +77,28 @@ class AdminDashboard : AppCompatActivity() {
         }
 
 
+    }
+
+
+    private fun getDataFromFirebase(){
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("Subjects")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val newData = ArrayList<ModelSubjects>()
+                for (snapshot in dataSnapshot.children) {
+                    val myData = snapshot.getValue(ModelSubjects::class.java)
+                    newData.add(myData!!)
+                }
+                subjectList.clear()
+                subjectList.addAll(newData)
+                myAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(ContentValues.TAG, "onCancelled", databaseError.toException())
+            }
+        })
     }
 
     private fun checkUser() {

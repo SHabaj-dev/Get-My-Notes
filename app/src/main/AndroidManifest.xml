@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,16 +11,24 @@
         android:icon="@mipmap/ic_custom"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GetMyNotes"
+        android:theme="@style/Theme.CustomTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ui.AddSubjectActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CustomTheme"/>
+        <activity
+            android:name=".ui.AdminDashboard"
+            android:exported="false"
+            android:theme="@style/Theme.CustomTheme" />
+        <activity
             android:name=".ui.ForgotPassword"
-            android:theme="@style/Theme.CustomTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CustomTheme" />
         <activity
             android:name=".ui.SignUpPage"
             android:exported="false"
-            android:theme="@style/Theme.CustomTheme"/>
+            android:theme="@style/Theme.CustomTheme" />
         <activity
             android:name=".ui.LoginPage"
             android:exported="false"

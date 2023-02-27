@@ -11,6 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.sbz.getmynotes.R
+import kotlinx.coroutines.Dispatchers
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
@@ -24,6 +25,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         updateButton.setOnClickListener {
             val newUName = updatedUserName.text.toString()
             updateUserInfo(newUName)
+
         }
 
 
@@ -48,11 +50,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun updateUserInfo(updatedUserName: String) {
         val user = Firebase.auth.currentUser
 
-        Toast.makeText(
-            requireContext(),
-            updatedUserName,
-            Toast.LENGTH_SHORT
-        ).show()
 
         val profileUpdates = userProfileChangeRequest {
             displayName = updatedUserName

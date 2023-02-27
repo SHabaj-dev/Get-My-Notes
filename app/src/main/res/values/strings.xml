@@ -44,5 +44,6 @@
     <string name="add_subject_1">Add Subject</string>
     <string name="subject_name">Subject Name</string>
     <string name="submit">Submit</string>
-    <string name="search_courses">Search Courses</string>
+    <string name="search_courses">Search Subjects</string>
+    <string name="all_courses">All Subjects</string>
 </resources>

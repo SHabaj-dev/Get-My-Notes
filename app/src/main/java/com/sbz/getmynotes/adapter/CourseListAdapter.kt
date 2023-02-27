@@ -23,6 +23,7 @@ class CourseListAdapter(val context: Context, val courseList: List<CourseList>) 
         return CourseViewHolder(view)
     }
 
+
     override fun getItemCount(): Int {
         return courseList.size
     }

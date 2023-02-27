@@ -1,6 +1,5 @@
 package com.sbz.getmynotes.adapter
 
-import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,16 +38,7 @@ class SubjectListAdapter(val context: Context, val subjectList: List<ModelSubjec
 
         holder.listItemSubject.text = subject
         holder.deleteButton.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle("Delete")
-                .setMessage("Are you sure want to delete subject ${subject} ?")
-                .setPositiveButton("Confirm") { a, d ->
-                    Toast.makeText(context, "Deleting...", Toast.LENGTH_SHORT).show()
-                    deleteCategory(currentCourse, holder)
-                }
-                .setNegativeButton("Cancel") { a, d ->
-                    a.dismiss()
-                }
+            deleteCategory(currentCourse, holder)
         }
     }
 

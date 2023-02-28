@@ -14,7 +14,7 @@
 
     <color name="transparent"> #00FFFFFF</color>
 
-    <color name="accent">  #9cacd8</color>
+    <color name="accent">#B39CACD8</color>
     <color name="yellow">  #FFDE03</color>
     <color name="home">#1194AA</color>
     <color name="settings">#AE7E0F</color>

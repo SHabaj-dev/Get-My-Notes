@@ -7,6 +7,6 @@
     <stroke android:color="@color/black"
         android:width="0.5dp"/>
 
-    <solid android:color="@color/accent"/>
+    <solid android:color="@color/home_20"/>
 
 </shape>

@@ -100,7 +100,7 @@
             android:padding="10dp"
             android:text="@string/submit"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/home"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/subject_til"
             app:layout_constraintStart_toStartOf="@+id/subject_til"

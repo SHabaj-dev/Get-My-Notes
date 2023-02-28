@@ -41,28 +41,15 @@ class AdminDashboard : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.rv_course_name)
         recyclerView.hasFixedSize()
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
         myAdapter = SubjectListAdapter(this, subjectList)
         recyclerView.adapter = myAdapter
 
         getDataFromFirebase()
-//        val ref = FirebaseDatabase.getInstance().getReference("Subjects")
-//        ref.addValueEventListener(object : ValueEventListener {
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                subjectList.clear()
-//                for(ds in snapshot.children){
-//                    val subject = ds.getValue(ModelSubjects::class.java)
-//                    subject?.let{subjectList.add(it)}
-//                }
-////                myAdapter.notifyDataSetChanged()
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//
-//            }
-//        }
-//        )
+
+        binding.fbAddPdf.setOnClickListener {
+            startActivity(Intent(this@AdminDashboard, AddPdfActivity::class.java))
+        }
 
         binding.btnLogoutAdmin.setOnClickListener {
             mAuth.signOut()
@@ -88,6 +75,7 @@ class AdminDashboard : AppCompatActivity() {
                 val newData = ArrayList<ModelSubjects>()
                 for (snapshot in dataSnapshot.children) {
                     val myData = snapshot.getValue(ModelSubjects::class.java)
+                    myData?.timestamp = snapshot.child("timestamp").value.toString().toLong()
                     newData.add(myData!!)
                 }
                 subjectList.clear()

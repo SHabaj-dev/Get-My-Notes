@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.AddPdfActivity">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_top_bar"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight=".5"
+                android:background="@color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/arrow_back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="3"
+                android:padding="5dp"
+                android:text="@string/add_pdf"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btn_attach_pdf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_weight=".5"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_attach_pdf" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/subject_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/topic_name"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <EditText
+                android:id="@+id/et_topic_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_pdf_grey24"
+                android:drawablePadding="10dp"
+                android:inputType="textPersonName|textCapSentences"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/et_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/et_background"
+            android:drawableStart="@drawable/ic_subject"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/select_subject"
+            android:inputType="textPersonName|textCapSentences"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/background_color"
+            app:layout_constraintEnd_toEndOf="@+id/subject_til"
+            app:layout_constraintStart_toStartOf="@+id/subject_til"
+            app:layout_constraintTop_toBottomOf="@+id/subject_til" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_upload_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/add_sub_btn_background"
+            android:padding="5dp"
+            android:text="@string/upload_pdf"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/home"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pb_upload"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/home"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_upload_pdf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

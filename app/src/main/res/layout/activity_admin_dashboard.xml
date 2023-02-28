@@ -124,7 +124,7 @@
             android:padding="5dp"
             android:text="@string/add_subject"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/home"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/fb_add_pdf"

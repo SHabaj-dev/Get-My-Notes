@@ -14,9 +14,12 @@
         android:theme="@style/Theme.CustomTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ui.AddPdfActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.AddSubjectActivity"
             android:exported="false"
-            android:theme="@style/Theme.CustomTheme"/>
+            android:theme="@style/Theme.CustomTheme" />
         <activity
             android:name=".ui.AdminDashboard"
             android:exported="false"

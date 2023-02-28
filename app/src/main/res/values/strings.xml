@@ -46,4 +46,8 @@
     <string name="submit">Submit</string>
     <string name="search_courses">Search Subjects</string>
     <string name="all_courses">All Subjects</string>
+    <string name="add_pdf">Add Pdf</string>
+    <string name="topic_name">Topic Name</string>
+    <string name="select_subject">Select Subject</string>
+    <string name="upload_pdf">Upload Pdf</string>
 </resources>

@@ -6,15 +6,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.LinearLayout
-import android.widget.SearchView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbz.getmynotes.R
 import com.sbz.getmynotes.adapter.PdfAdminAdapter
-import com.sbz.getmynotes.adapter.SubjectListAdapter
 import com.sbz.getmynotes.databinding.ActivityPdfListBinding
 import com.sbz.getmynotes.model.ModelPdf
 
@@ -40,6 +37,11 @@ class PdfListActivity : AppCompatActivity() {
         binding.subjectName.text = subject
 
         loadPdfList()
+
+
+        binding.btnBackPdfAdmin.setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
 
 
 

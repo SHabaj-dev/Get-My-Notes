@@ -3,12 +3,11 @@ package com.sbz.getmynotes.ui
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.Display.Mode
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -18,19 +17,17 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbz.getmynotes.R
-import com.sbz.getmynotes.adapter.CourseListAdapter
-import com.sbz.getmynotes.adapter.SubjectListAdapter
+import com.sbz.getmynotes.adapter.AdminSubjectAdapter
 import com.sbz.getmynotes.databinding.ActivityAdminDashboardBinding
-import com.sbz.getmynotes.model.CourseList
-import com.sbz.getmynotes.model.ModelSubjects
+import com.sbz.getmynotes.model.AdminSubjectModel
 
 class AdminDashboard : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminDashboardBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
-    private lateinit var myAdapter: SubjectListAdapter
-    private lateinit var subjectList: ArrayList<ModelSubjects>
+    private lateinit var myAdapter: AdminSubjectAdapter
+    private lateinit var subjectList: ArrayList<AdminSubjectModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +39,7 @@ class AdminDashboard : AppCompatActivity() {
         recyclerView = findViewById(R.id.rv_course_name)
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
-        myAdapter = SubjectListAdapter(this, subjectList)
+        myAdapter = AdminSubjectAdapter(this, subjectList)
         recyclerView.adapter = myAdapter
 
         getDataFromFirebase()
@@ -63,6 +60,25 @@ class AdminDashboard : AppCompatActivity() {
             startActivity(Intent(this, AddSubjectActivity::class.java))
         }
 
+        binding.etSearchCourses.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                try{
+                    myAdapter.filter!!.filter(s)
+                }catch (e: Exception){
+                    Log.d("SEARCH_LOG", "onTextChanged: ${e.message}")
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+
 
     }
 
@@ -72,9 +88,9 @@ class AdminDashboard : AppCompatActivity() {
         val myRef = database.getReference("Subjects")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val newData = ArrayList<ModelSubjects>()
+                val newData = ArrayList<AdminSubjectModel>()
                 for (snapshot in dataSnapshot.children) {
-                    val myData = snapshot.getValue(ModelSubjects::class.java)
+                    val myData = snapshot.getValue(AdminSubjectModel::class.java)
                     myData?.timestamp = snapshot.child("timestamp").value.toString().toLong()
                     newData.add(myData!!)
                 }

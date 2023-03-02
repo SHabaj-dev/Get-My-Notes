@@ -86,15 +86,19 @@
 
         </LinearLayout>
 
-        <SearchView
+
+        <EditText
             android:id="@+id/et_search_courses"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="16dp"
             android:background="@drawable/searchbar_background"
             android:elevation="20dp"
-            android:iconifiedByDefault="false"
+            android:drawableStart="@drawable/ic_search"
+            android:padding="10dp"
             android:queryHint="@string/search_courses"
+            android:textColorHint="@color/home"
+            android:textColor="@color/home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout" />

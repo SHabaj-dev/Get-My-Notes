@@ -20,14 +20,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.databinding.ActivityAddPdfBinding
-import com.sbz.getmynotes.model.ModelSubjects
+import com.sbz.getmynotes.model.AdminSubjectModel
 
 class AddPdfActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPdfBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
-    private lateinit var subjectArrayList: ArrayList<ModelSubjects>
+    private lateinit var subjectArrayList: ArrayList<AdminSubjectModel>
     private var pdfUri: Uri? = null
     private val TAG = "PDF_ADD_TAG"
 
@@ -52,7 +52,7 @@ class AddPdfActivity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
@@ -142,7 +142,7 @@ class AddPdfActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 subjectArrayList.clear()
                 for (ds in snapshot.children) {
-                    val subject = ds.getValue(ModelSubjects::class.java)
+                    val subject = ds.getValue(AdminSubjectModel::class.java)
                     subjectArrayList.add(subject!!)
                     Log.d(TAG, "onDataChange: ${subject.subject}")
 

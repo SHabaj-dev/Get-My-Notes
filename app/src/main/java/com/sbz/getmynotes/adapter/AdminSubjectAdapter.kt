@@ -5,23 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
-import com.sbz.getmynotes.ui.PdfListActivity
 import com.sbz.getmynotes.R
-import com.sbz.getmynotes.model.ModelSubjects
+import com.sbz.getmynotes.filter.FilterAdminDashboard
+import com.sbz.getmynotes.model.AdminSubjectModel
+import com.sbz.getmynotes.ui.PdfListActivity
 
-class SubjectListAdapter(val context: Context, val subjectList: List<ModelSubjects>) :
-    RecyclerView.Adapter<SubjectListAdapter.SubjectViewHolder>() {
+class AdminSubjectAdapter(val context: Context, var subjectList: ArrayList<AdminSubjectModel>) :
+    RecyclerView.Adapter<AdminSubjectAdapter.SubjectViewHolder>(),
+    Filterable {
 
-    inner class SubjectViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
-        //        val cardLayout = itemView.findViewById<CardView>(R.id.card_layout)
-        val listItemSubject = itemView.findViewById<TextView>(R.id.list_item_subject)
-        val deleteButton = itemView.findViewById<ImageButton>(R.id.btn_delete)
-    }
+    private val filterList: ArrayList<AdminSubjectModel> = subjectList
+    private var filter: FilterAdminDashboard? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_custom_admin, parent, false)
@@ -68,7 +65,7 @@ class SubjectListAdapter(val context: Context, val subjectList: List<ModelSubjec
 
     }
 
-    private fun deleteCategory(currentCourse: ModelSubjects, holder: SubjectViewHolder) {
+    private fun deleteCategory(currentCourse: AdminSubjectModel, holder: SubjectViewHolder) {
         val id = currentCourse.id
 //        Subjects -> subjectId
         val ref = FirebaseDatabase.getInstance().getReference("Subjects")
@@ -80,5 +77,19 @@ class SubjectListAdapter(val context: Context, val subjectList: List<ModelSubjec
             .addOnFailureListener { e ->
                 Toast.makeText(context, "Error ${e.printStackTrace()}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    override fun getFilter(): Filter {
+        if (filter == null) {
+            filter = FilterAdminDashboard(filterList, this)
+        }
+        return filter as FilterAdminDashboard
+    }
+
+
+    inner class SubjectViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
+        //        val cardLayout = itemView.findViewById<CardView>(R.id.card_layout)
+        val listItemSubject = itemView.findViewById<TextView>(R.id.list_item_subject)
+        val deleteButton = itemView.findViewById<ImageButton>(R.id.btn_delete)
     }
 }

@@ -1,4 +1,4 @@
-package com.sbz.getmynotes.ui
+package com.sbz.getmynotes.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.sbz.getmynotes.R
-import kotlinx.coroutines.Dispatchers
+import com.sbz.getmynotes.ui.LoginPage
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 

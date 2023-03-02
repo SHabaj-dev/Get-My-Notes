@@ -23,7 +23,7 @@ class AddSubjectActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         binding.btnSubmit.setOnClickListener {

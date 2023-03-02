@@ -1,19 +1,17 @@
-package com.sbz.getmynotes
+package com.sbz.getmynotes.ui
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.sbz.getmynotes.R
 import com.sbz.getmynotes.databinding.ActivityMainBinding
-import com.sbz.getmynotes.ui.MainFragment
-import com.sbz.getmynotes.ui.SettingsFragment
+import com.sbz.getmynotes.fragments.MainFragment
+import com.sbz.getmynotes.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

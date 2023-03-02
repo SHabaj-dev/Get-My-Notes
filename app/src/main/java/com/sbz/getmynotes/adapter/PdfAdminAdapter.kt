@@ -21,7 +21,7 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
     private val filterList: ArrayList<ModelPdf> = pdfArrayList
 
 
-    var filter: FilterPdfAdmin? = null
+    private var filter: FilterPdfAdmin? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderAdminPdf {

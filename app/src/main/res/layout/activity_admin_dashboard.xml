@@ -87,7 +87,7 @@
         </LinearLayout>
 
         <SearchView
-            android:id="@+id/sv_search_courses"
+            android:id="@+id/et_search_courses"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="16dp"
@@ -108,7 +108,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_add_subject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sv_search_courses"
+            app:layout_constraintTop_toBottomOf="@id/et_search_courses"
             tools:listitem="@layout/item_custom_admin" />
 
 

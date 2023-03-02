@@ -1,6 +1,8 @@
 package com.sbz.getmynotes.adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -8,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
+import com.sbz.getmynotes.ui.PdfListActivity
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.model.ModelSubjects
 
@@ -38,8 +41,31 @@ class SubjectListAdapter(val context: Context, val subjectList: List<ModelSubjec
 
         holder.listItemSubject.text = subject
         holder.deleteButton.setOnClickListener {
-            deleteCategory(currentCourse, holder)
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Delete")
+                .setMessage("Are you sure you want to delete this subject?")
+                .setPositiveButton("Confirm") {a, d ->
+                    deleteCategory(currentCourse, holder)
+                }
+                .setNegativeButton("Cancel"){a, d ->
+                    a.dismiss()
+
+                }
+                .show()
         }
+
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, PdfListActivity::class.java)
+            intent.putExtra("subjectId", id)
+            intent.putExtra("subject", subject)
+            context.startActivity(intent)
+        }
+
+
+
+
+
     }
 
     private fun deleteCategory(currentCourse: ModelSubjects, holder: SubjectViewHolder) {

@@ -120,7 +120,7 @@ class AddPdfActivity : AppCompatActivity() {
         hashMap["viewCount"] = 0
         hashMap["downloadsCount"] = 0
 
-        val ref = FirebaseDatabase.getInstance().getReference("Subjects")
+        val ref = FirebaseDatabase.getInstance().getReference("Notes")
         ref.child("$timestamp")
             .setValue(hashMap)
             .addOnSuccessListener {

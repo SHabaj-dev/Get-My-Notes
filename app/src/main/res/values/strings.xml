@@ -52,6 +52,7 @@
     <string name="upload_pdf">Upload Pdf</string>
     <string name="subjects">Subjects</string>
     <string name="categories">Categories</string>
-    <string name="_13mb">13MB</string>
+    <string name="_13mb">0MB</string>
     <string name="date_string">dd/MM/yyyy</string>
+    <string name="update_pdf">Update Pdf</string>
 </resources>

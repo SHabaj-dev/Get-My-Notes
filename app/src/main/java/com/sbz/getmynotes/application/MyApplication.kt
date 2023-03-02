@@ -1,9 +1,12 @@
 package com.sbz.getmynotes.application
 
 import android.app.Application
+import android.app.ProgressDialog
+import android.content.Context
 import android.text.format.DateFormat
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -79,6 +82,38 @@ class MyApplication : Application() {
 
                     }
                 })
+        }
+
+
+        fun deleteNotesPdf(context: Context, subject: String, url: String, topic: String) {
+            val progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Please Wait")
+            progressDialog.setMessage("Deleting Notes $topic...")
+            progressDialog.setCanceledOnTouchOutside(false)
+            progressDialog.show()
+
+            val storeRef = FirebaseStorage.getInstance().getReferenceFromUrl(url)
+            storeRef.delete()
+                .addOnSuccessListener {
+
+                    val ref = FirebaseDatabase.getInstance().getReference("Notes")
+                    ref.child(subject)
+                        .removeValue()
+                        .addOnSuccessListener {
+                            Log.d(TAG, "deleteNotesPdf: Removed Data From DB")
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "deleteNotesPdf: Failed Deleting from DB")
+                        }
+
+
+                    progressDialog.dismiss()
+                    Toast.makeText(context, "Deletion Successfully...", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    progressDialog.dismiss()
+                    Toast.makeText(context, "Deletion Failed due to ${it.message}", Toast.LENGTH_SHORT).show()
+                }
         }
 
 

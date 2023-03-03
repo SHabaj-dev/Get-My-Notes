@@ -1,21 +1,21 @@
 package com.sbz.getmynotes.adapter
 
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.sbz.getmynotes.ui.EditPdfActivity
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.application.MyApplication
 import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.model.ModelPdf
+import com.sbz.getmynotes.ui.EditPdfActivity
 
 class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf>) :
     RecyclerView.Adapter<PdfAdminAdapter.ViewHolderAdminPdf>(),

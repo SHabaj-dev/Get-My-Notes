@@ -56,7 +56,7 @@
                     android:layout_margin="18dp"
                     android:layout_weight=".25"
                     android:background="@drawable/btn_delete_shape"
-                    android:src="@drawable/ic_delete_" />
+                    android:src="@drawable/ic_delete" />
             </LinearLayout>
 
 

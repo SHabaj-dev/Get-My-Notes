@@ -1,6 +1,8 @@
 package com.sbz.getmynotes.adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import com.sbz.getmynotes.R
 import com.sbz.getmynotes.application.MyApplication
 import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.model.ModelPdf
+import com.sbz.getmynotes.ui.EditPdfActivity
 
 class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf>) :
     RecyclerView.Adapter<PdfAdminAdapter.ViewHolderAdminPdf>(),
@@ -35,14 +38,9 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
 
     override fun onBindViewHolder(holder: ViewHolderAdminPdf, position: Int) {
         val currentData = pdfArrayList[position]
-        val pdfId = currentData.id
-        val subjectId = currentData.subjectId
         val timestamp = currentData.timestamp
         val topic = currentData.topic
-        val uid = currentData.uid
         val pdfUrl = currentData.url
-        val downloadCount = currentData.downloadsCount
-        val viewCount = currentData.viewCount
 
         val formattedDate = MyApplication.formatTimeStamp(timestamp)
         holder.dateTv.text = formattedDate
@@ -52,8 +50,41 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
         MyApplication.loadPdfFromUrlSinglePAge(pdfUrl, topic, null)
         MyApplication.loadPdfSize(pdfUrl, topic, holder.sizeTv)
 
+        holder.btnMore.setOnClickListener {
+            moreOptionDialogue(currentData, holder)
+        }
+
 
     }
+
+    private fun moreOptionDialogue(
+        currentData: ModelPdf,
+        holder: PdfAdminAdapter.ViewHolderAdminPdf
+    ) {
+        val subjectId = currentData.subjectId
+        val topic = currentData.topic
+        val url = currentData.url
+
+        val options = arrayOf("Edit", "Delete")
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Choose Option")
+            .setItems(options) { dialog, position ->
+                if (position == 0) {
+                val intent = Intent(context, EditPdfActivity::class.java)
+                    intent.putExtra("subjectId", currentData.id)
+                    context.startActivity(intent)
+                } else {
+
+                    MyApplication.deleteNotesPdf(context, currentData.id, url, topic)
+                }
+
+            }
+            .show()
+
+
+    }
+
 
     override fun getFilter(): Filter {
         if (filter == null) {
@@ -66,10 +97,10 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
 
     inner class ViewHolderAdminPdf(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val pdfTopicNameTv = itemView.findViewById<TextView>(R.id.pdf_topic_name_tv)
-        val sizeTv = itemView.findViewById<TextView>(R.id.sizeTv)
-        val dateTv = itemView.findViewById<TextView>(R.id.dateTv)
-        val btnMore = itemView.findViewById<ImageButton>(R.id.btn_more)
+        val pdfTopicNameTv: TextView = itemView.findViewById(R.id.pdf_topic_name_tv)
+        val sizeTv: TextView = itemView.findViewById(R.id.sizeTv)
+        val dateTv: TextView = itemView.findViewById(R.id.dateTv)
+        val btnMore: ImageButton = itemView.findViewById(R.id.btn_more)
     }
 
 

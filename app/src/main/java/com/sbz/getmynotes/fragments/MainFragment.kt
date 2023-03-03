@@ -1,6 +1,7 @@
 package com.sbz.getmynotes.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,16 +23,21 @@ import com.sbz.getmynotes.adapter.UserSubjectAdapter
 import com.sbz.getmynotes.model.UserSubjectModel
 
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment(R.layout.fragment_main),
+    UserSubjectAdapter.OnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var myAdapter: UserSubjectAdapter
-   // private lateinit var adapter: CourseListAdapter
+
+    // private lateinit var adapter: CourseListAdapter
     private lateinit var userSubjectModel: ArrayList<UserSubjectModel>
-    private lateinit var data: ArrayList<UserSubjectModel>
     private lateinit var searchText: TextView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         recyclerView = view.findViewById(R.id.rv_course_name)
         searchText = view.findViewById(R.id.sv_search_notes_main)
@@ -42,7 +48,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         //data = ArrayList()
         userSubjectModel = ArrayList()
-        myAdapter = UserSubjectAdapter(requireContext(), userSubjectModel)
+        myAdapter = UserSubjectAdapter(requireContext(), userSubjectModel, this)
         recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
         recyclerView.adapter = myAdapter
         getDataFromFirebase() // Call this function to get data from Firebase and update the adapter
@@ -88,6 +94,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         })
     }
 
+    override fun onItemClick(position: Int) {
+        val selectedSubjectId = userSubjectModel[position].id
+        val selectedLanguage = userSubjectModel[position].subject
+        val intent = Intent()
+        intent.putExtra("Heading", selectedLanguage)
+        val pdfViewUserFragment = PdfViewUserFragment.newInstance(selectedSubjectId)
 
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.fl_fragment, pdfViewUserFragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
 }
+

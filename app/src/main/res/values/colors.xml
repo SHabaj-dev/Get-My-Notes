@@ -18,11 +18,13 @@
     <color name="yellow">  #FFDE03</color>
     <color name="home">#1194AA</color>
     <color name="settings">#AE7E0F</color>
+    <color name="Delete">#F82424</color>
 
 
     <color name="home_20">#331194AA</color>
     <color name="settings_20">#33AE7E0F</color>
     <color name="logout_btn_color">#80E81010</color>
+    <color name="Delete_20">#33FF0202</color>
 
 
 </resources>

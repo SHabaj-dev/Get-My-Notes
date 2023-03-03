@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".fragments.PdfViewUserFragment">
+
+        <EditText
+            android:id="@+id/et_search_courses_user"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="8dp"
+            android:background="@drawable/searchbar_background"
+            android:drawableStart="@drawable/ic_search"
+            android:elevation="20dp"
+            android:padding="10dp"
+            android:queryHint="@string/search_courses"
+            android:textColor="@color/home"
+            android:textColorHint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_course_name_user"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search_courses_user"
+            tools:listitem="@layout/list_pdf_admin" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

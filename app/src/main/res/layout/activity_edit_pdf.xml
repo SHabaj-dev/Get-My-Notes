@@ -40,10 +40,9 @@
                 android:padding="5dp"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:text="@string/update_pdf"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="30sp" />
 
 
         </LinearLayout>
@@ -70,7 +69,7 @@
                 android:drawableStart="@drawable/ic_pdf_grey24"
                 android:drawablePadding="10dp"
                 android:inputType="textPersonName|textCapSentences"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
@@ -86,18 +85,17 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/et_background"
-            android:drawableStart="@drawable/ic_subject"
-            android:drawableEnd="@drawable/ic_arrow_down"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:hint="@string/select_subject"
-            android:inputType="textPersonName|textCapSentences"
-            android:padding="10dp"
+            android:padding="12dp"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/background_color"
             app:layout_constraintEnd_toEndOf="@+id/subject_til"
             app:layout_constraintStart_toStartOf="@+id/subject_til"
+            app:drawableEndCompat="@drawable/ic_arrow_down"
+            app:drawableStartCompat="@drawable/ic_subject"
             app:layout_constraintTop_toBottomOf="@+id/subject_til" />
 
         <androidx.appcompat.widget.AppCompatButton

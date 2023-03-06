@@ -21,7 +21,7 @@ class AdminSubjectAdapter(val context: Context, var subjectList: ArrayList<Admin
     private var filter: FilterAdminDashboard? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_custom_admin, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.list_item_subjects_admin, parent, false)
         return SubjectViewHolder(view)
     }
 

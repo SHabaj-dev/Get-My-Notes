@@ -2,6 +2,7 @@ package com.sbz.getmynotes.ui
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,11 +11,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.databinding.ActivitySignUpPageBinding
 
-@Suppress("DEPRECATION")
 class SignUpPage : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpPageBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mEmail: String
+    private var mUniversityName: String = ""
     private lateinit var mPassword: String
     private lateinit var mUserName: String
     private lateinit var mConfirmPassword: String
@@ -23,16 +24,19 @@ class SignUpPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up_page)
 
-        binding.btnBack.setOnClickListener { onBackPressed() }
+        binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
-        binding.tvLogin.setOnClickListener { onBackPressed() }
+        binding.tvLogin.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         binding.btnSignUp.setOnClickListener {
+            binding.btnSignUp.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
             try {
                 mEmail = binding.email.text.toString().trim()
                 mPassword = binding.passwordSignUp.text.toString().trim()
                 mConfirmPassword = binding.confirmPass.text.toString().trim()
                 mUserName = binding.tvUserName.text.toString().trim()
+                mUniversityName = binding.uniName.text.toString().trim()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -40,20 +44,21 @@ class SignUpPage : AppCompatActivity() {
             if (mEmail.isEmpty() || mPassword.isEmpty() || mConfirmPassword.isEmpty() || mUserName.isEmpty()) {
                 Toast.makeText(this, "Please Fill the Credentials Carefully", Toast.LENGTH_SHORT)
                     .show()
+                binding.btnSignUp.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
             } else if (!mPassword.equals(mConfirmPassword)) {
                 Toast.makeText(this, "Password didn't match.", Toast.LENGTH_SHORT).show()
+                binding.btnSignUp.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
             } else if (mPassword.length < 8) {
                 Toast.makeText(
                     this,
                     "Password must be at least 8 characters long",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.btnSignUp.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
             } else {
-
-                progressDialog = ProgressDialog(this)
-                progressDialog.setTitle("Please Wait")
-                progressDialog.setCanceledOnTouchOutside(false)
-
 
                 createUser(mEmail, mPassword, mUserName)
             }
@@ -72,12 +77,13 @@ class SignUpPage : AppCompatActivity() {
                         "Something went Wrong!! Please Try Again",
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.btnSignUp.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                 }
             }
     }
 
     private fun updateUserInfo() {
-        progressDialog.setMessage("Saving User info...")
 
         val timeStamp = System.currentTimeMillis()
 
@@ -90,7 +96,7 @@ class SignUpPage : AppCompatActivity() {
         hashMap["profileImage"] = ""
         hashMap["userType"] = "user"
         hashMap["timeStamp"] = timeStamp
-        hashMap["universityName"] = ""
+        hashMap["universityName"] = mUniversityName
 
 
         val ref = FirebaseDatabase.getInstance().getReference("Users")
@@ -99,7 +105,7 @@ class SignUpPage : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Saving User Info Success", Toast.LENGTH_SHORT).show()
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
 
             }
             .addOnFailureListener { e ->

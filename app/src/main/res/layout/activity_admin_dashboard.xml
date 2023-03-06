@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search_courses"
-            tools:listitem="@layout/item_custom_admin" />
+            tools:listitem="@layout/list_item_subjects_admin" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -99,17 +99,18 @@
             app:layout_constraintEnd_toStartOf="@id/fb_add_pdf"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <ImageView
             android:id="@+id/fb_add_pdf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_pdf"
-            app:borderWidth="0dp"
-            app:fabSize="normal"
+            android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/add_pdf_button" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

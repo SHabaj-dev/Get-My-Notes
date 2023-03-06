@@ -106,6 +106,7 @@
         android:background="@drawable/card_background"
         android:elevation="8dp"
         android:text="@string/update"
+        android:textColor="@color/home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -119,6 +120,7 @@
         android:text="@string/log_out"
         android:elevation="8dp"
         android:layout_marginEnd="30dp"
+        android:textColor="@color/magenta"
         android:background="@drawable/log_out_btn_background"
         android:layout_marginBottom="30dp"
         />

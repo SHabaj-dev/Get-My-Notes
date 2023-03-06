@@ -48,6 +48,8 @@ class AddPdfActivity : AppCompatActivity() {
         }
 
         binding.btnUploadPdf.setOnClickListener {
+            binding.btnUploadPdf.visibility = View.GONE
+            binding.pbUpload.visibility = View.VISIBLE
             validateData()
         }
 
@@ -64,10 +66,16 @@ class AddPdfActivity : AppCompatActivity() {
         subject = binding.etCourse.text.toString().trim()
 
         if (topic.isEmpty()) {
+            binding.btnUploadPdf.visibility = View.VISIBLE
+            binding.pbUpload.visibility = View.GONE
             Toast.makeText(this, "Topic Can't Be Empty", Toast.LENGTH_SHORT).show()
         } else if (subject.isEmpty()) {
+            binding.btnUploadPdf.visibility = View.VISIBLE
+            binding.pbUpload.visibility = View.GONE
             Toast.makeText(this, "Please Pick a Subject", Toast.LENGTH_SHORT).show()
         } else if (pdfUri == null) {
+            binding.btnUploadPdf.visibility = View.VISIBLE
+            binding.pbUpload.visibility = View.GONE
             Toast.makeText(
                 this,
                 "No File is Selected \n  Please select a File.",
@@ -80,7 +88,6 @@ class AddPdfActivity : AppCompatActivity() {
     }
 
     private fun uploadPdfToFireStore() {
-        binding.pbUpload.visibility = View.VISIBLE
 
         val timestamp = System.currentTimeMillis()
         val filePathAndName = "Notes/$timestamp"
@@ -97,10 +104,12 @@ class AddPdfActivity : AppCompatActivity() {
 
 
                 Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show()
+                binding.btnUploadPdf.visibility = View.VISIBLE
                 binding.pbUpload.visibility = View.GONE
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Upload Failed due to ${e.message}", Toast.LENGTH_SHORT).show()
+                binding.btnUploadPdf.visibility = View.VISIBLE
                 binding.pbUpload.visibility = View.GONE
 
             }

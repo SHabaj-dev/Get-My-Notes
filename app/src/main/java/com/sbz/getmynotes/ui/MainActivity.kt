@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = this.resources.getColor(R.color.home_20)
 
+
+
         setFirstFragment()
         binding.tvSettings.visibility = View.GONE
         binding.tvAllCourse.visibility=View.VISIBLE
@@ -34,9 +36,6 @@ class MainActivity : AppCompatActivity() {
 
                 getUserName()
                 setFirstFragment()
-
-                binding.tvSettings.visibility = View.GONE
-                binding.tvAllCourse.visibility=View.VISIBLE
 
                 binding.ivSettings.setImageResource(R.drawable.settings_icon)
                 binding.settingsLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity() {
 
                 setSecondFragment()
                 binding.tvSettings.visibility = View.VISIBLE
-                binding.tvAllCourse.visibility=View.GONE
 
                 //setting the original params
              /*   binding.ivUserProfile.layoutParams = originalParams1
@@ -105,14 +103,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnBack.setOnClickListener {
-            setFirstFragment()
-        }
 
     }
 
     private fun setSecondFragment() {
-        binding.btnBack.visibility = View.VISIBLE
+        binding.tvAllCourse.text = "Profile"
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_fragment, settingsFragment)
             commit()
@@ -120,7 +115,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFirstFragment() {
-        binding.btnBack.visibility = View.GONE
+        binding.tvSettings.visibility = View.GONE
+        binding.tvAllCourse.setText("All Subjects")
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_fragment, mainFragment)
             commit()

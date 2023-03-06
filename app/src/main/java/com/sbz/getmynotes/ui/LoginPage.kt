@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,9 +29,6 @@ class LoginPage : AppCompatActivity() {
         mAuth = Firebase.auth
 
 
-
-
-
         binding.tvSignUp.setOnClickListener {
             navToSignUpPage()
         }
@@ -46,7 +42,7 @@ class LoginPage : AppCompatActivity() {
 
 //            validateData()
             binding.pbLogin.visibility = View.VISIBLE
-            makeButtonDisable(binding.btnLogin)
+            binding.btnLogin.visibility = View.GONE
 
             try {
                 mEmail = binding.email.text.toString()
@@ -57,22 +53,19 @@ class LoginPage : AppCompatActivity() {
             if (mEmail.isEmpty()) {
                 Toast.makeText(this, "Please Enter Your Email", Toast.LENGTH_SHORT).show()
                 binding.pbLogin.visibility = View.GONE
+                binding.btnLogin.visibility = View.VISIBLE
             }
             if (mPassword.isEmpty()) {
                 Toast.makeText(this, "Password can't be empty!!!", Toast.LENGTH_SHORT).show()
                 binding.pbLogin.visibility = View.GONE
+                binding.btnLogin.visibility = View.VISIBLE
             } else {
                 loginUser(mEmail, mPassword)
+//                finish()
             }
         }
 
 
-    }
-
-    private fun makeButtonDisable(btnLogin: AppCompatButton) {
-        btnLogin.isEnabled = false
-//        btnLogin.setBackgroundColor(Color.LTGRAY)
-//        btnLogin.setTextColor(Color.WHITE)
     }
 
 
@@ -99,7 +92,6 @@ class LoginPage : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
 
             })
@@ -119,6 +111,7 @@ class LoginPage : AppCompatActivity() {
                     Toast.makeText(this, "Authentication Failed!!\n Please Try Again.", Toast.LENGTH_SHORT)
                         .show()
                     binding.pbLogin.visibility = View.GONE
+                    binding.btnLogin.visibility = View.VISIBLE
                 }
             }
     }

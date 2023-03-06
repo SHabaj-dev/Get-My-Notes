@@ -112,7 +112,7 @@ class AdminDashboard : AppCompatActivity() {
             finish()
         } else {
             val mEmail = firebaseUser.email
-            binding.tvAdminText.text = mEmail
+//            binding.tvAdminText.text = mEmail
         }
     }
 }

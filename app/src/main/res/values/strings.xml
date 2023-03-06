@@ -36,7 +36,7 @@
     <string name="want_to_change_password">Want to Change Password?</string>
     <string name="click_here">Click Here.</string>
     <string name="log_out">Log Out</string>
-    <string name="update">Update</string>
+    <string name="update">Update Profile</string>
     <string name="dashboard_admin">Dashboard Admin</string>
     <string name="admin_example_com">admin@example.com</string>
     <string name="admin_dashboard">Admin Dashboard</string>
@@ -55,4 +55,9 @@
     <string name="_13mb">0MB</string>
     <string name="date_string">dd/MM/yyyy</string>
     <string name="update_pdf">Update Pdf</string>
+    <string name="n_a">N/a</string>
+    <string name="back_button">Back Button</string>
+    <string name="new_user_name">New User Name</string>
+    <string name="update_info">Update Info</string>
+    <string name="please_wait">Please Wait...</string>
 </resources>

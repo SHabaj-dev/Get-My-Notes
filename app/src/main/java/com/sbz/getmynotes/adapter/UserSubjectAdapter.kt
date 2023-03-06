@@ -25,7 +25,7 @@ class UserSubjectAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_custom, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.list_item_user, parent, false)
         return CourseViewHolder(view)
     }
 

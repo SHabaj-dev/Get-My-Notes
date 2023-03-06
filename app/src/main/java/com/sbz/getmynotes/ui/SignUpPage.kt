@@ -90,6 +90,7 @@ class SignUpPage : AppCompatActivity() {
         hashMap["profileImage"] = ""
         hashMap["userType"] = "user"
         hashMap["timeStamp"] = timeStamp
+        hashMap["universityName"] = ""
 
 
         val ref = FirebaseDatabase.getInstance().getReference("Users")

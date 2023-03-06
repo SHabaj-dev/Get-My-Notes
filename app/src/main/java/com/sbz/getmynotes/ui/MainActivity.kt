@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 binding.homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
 
                 binding.tvSettings.visibility = View.VISIBLE
-                binding.ivSettings.setImageResource(R.drawable.settings_icon)
+                binding.ivSettings.setImageResource(R.drawable.settings_icon_slected)
                 binding.settingsLayout.setBackgroundResource(R.drawable.round_back_settings_100)
 
                 val scaleAnimation = ScaleAnimation(
@@ -105,9 +105,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnBack.setOnClickListener {
+            setFirstFragment()
+        }
+
     }
 
     private fun setSecondFragment() {
+        binding.btnBack.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_fragment, settingsFragment)
             commit()
@@ -115,6 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFirstFragment() {
+        binding.btnBack.visibility = View.GONE
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_fragment, mainFragment)
             commit()

@@ -12,23 +12,32 @@
         <LinearLayout
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/background_top_bar"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/arrow_back"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_all_course"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="@string/all_courses"
+                android:layout_margin="10dp"
                 android:gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:textStyle="bold|italic"

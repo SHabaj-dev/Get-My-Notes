@@ -17,6 +17,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Task
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,9 +38,15 @@ class UpdateProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val shapeApperanceModel = ShapeAppearanceModel.builder()
+            .setAllCorners(CornerFamily.ROUNDED, 225f)
+            .build()
+        binding.shapeableImageView.shapeAppearanceModel = shapeApperanceModel
 
         mAuth = FirebaseAuth.getInstance()
         loadUserInfo()
+
+
 
         binding.ibBackBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -49,6 +57,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         }
         binding.shapeableImageView.setOnClickListener {
             showImageAttachMenu()
+
         }
 
     }

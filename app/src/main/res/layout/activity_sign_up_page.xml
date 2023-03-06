@@ -10,32 +10,34 @@
         android:background="@color/white"
         tools:context=".ui.SignUpPage">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/arrow_back"/>
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:src="@drawable/arrow_back" />
 
         <TextView
             android:id="@+id/tv_msg1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
-            app:layout_constraintTop_toBottomOf="@id/btn_back"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rostemary"
+            android:textSize="30sp"
             android:layout_marginEnd="30dp"
             android:textColor="@color/black"
             android:textAlignment="textStart"
             android:padding="5dp"
-            android:fontFamily="@font/berlings"
-            android:textSize="60sp"/>
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -46,7 +48,7 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:cardBackgroundColor="@color/white"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp">
 
@@ -60,7 +62,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/email"
                     android:textColorHint="@color/black"
                     app:boxStrokeColor="@color/black"
@@ -74,8 +76,9 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:drawableStart="@drawable/ic_mail"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +87,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="15dp"
                     android:hint="@string/user_name"
                     android:textColorHint="@color/black"
                     app:boxStrokeColor="@color/black"
@@ -97,8 +100,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:drawableStart="@drawable/person_icon"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_uni_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:hint="@string/university_collage_name"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_uName"
+                    app:passwordToggleTint="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/uni_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_university"
+                        android:drawablePadding="5dp"
+                        android:inputType="textPersonName|textCapWords"
+                        android:singleLine="true"
+                        android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +143,7 @@
                     app:boxStrokeColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/til_uName"
+                    app:layout_constraintTop_toBottomOf="@id/til_uni_name"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/black">
 
@@ -124,7 +154,8 @@
                         android:inputType="textPassword"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:drawableStart="@drawable/ic_password"
+                        android:drawablePadding="5dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,7 +181,8 @@
                         android:inputType="textPassword"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:drawableStart="@drawable/ic_password"
+                        android:drawablePadding="5dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -165,10 +197,26 @@
                     android:padding="5dp"
                     android:text="@string/sign_up"
                     android:textColor="@color/black"
+                    android:visibility="visible"
                     android:background="@drawable/card_background"
                     app:layout_constraintEnd_toEndOf="@id/til_conf_pass"
                     app:layout_constraintTop_toBottomOf="@id/til_conf_pass"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/home"
+                    android:indeterminateTintMode="src_atop"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/til_conf_pass" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

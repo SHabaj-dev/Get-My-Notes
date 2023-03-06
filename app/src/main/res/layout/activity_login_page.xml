@@ -16,10 +16,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
-            android:fontFamily="@font/berlings"
             android:text="@string/log_in"
             android:textColor="@color/black"
             android:textSize="50sp"
+            android:fontFamily="@font/rostemary"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,10 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/custom"
             android:text="@string/please_sign_in_to_continue"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:fontFamily="@font/rostemary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_login"
             app:layout_constraintTop_toBottomOf="@id/tv_login" />
@@ -41,9 +42,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="20dp"
             app:cardBackgroundColor="@color/white"
             android:background="@drawable/card_background"
             app:cardCornerRadius="20dp"
@@ -66,6 +67,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:hint="@string/email"
+                    app:hintTextColor="@color/black"
                     android:textColorHint="@color/black"
                     app:boxStrokeColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +80,9 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
+                        android:drawableStart="@drawable/ic_mail"
+                        android:drawablePadding="5dp"
+
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -93,6 +98,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="@string/password"
                     android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black"
                     app:boxStrokeColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +137,9 @@
                     android:padding="5dp"
                     android:background="@drawable/card_background"
                     android:text="@string/log_in"
-                    android:textColor="@color/black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/home"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/tv_forgot_password"
                     app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
@@ -151,7 +159,7 @@
             android:visibility="gone"
             android:indeterminate="true"
             android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/home_20"/>
+            android:indeterminateTint="@color/home"/>
 
 
         <LinearLayout

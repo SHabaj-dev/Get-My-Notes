@@ -3,28 +3,37 @@ package com.sbz.getmynotes.adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.application.MyApplication
 import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.model.ModelPdf
 import com.sbz.getmynotes.ui.EditPdfActivity
+import java.io.FileOutputStream
 
 class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf>) :
     RecyclerView.Adapter<PdfAdminAdapter.ViewHolderAdminPdf>(),
     Filterable {
 
+    companion object {
+        const val TAG = "TITLE_EXCEPTION_ERROR"
+    }
+
     private val filterList: ArrayList<ModelPdf> = pdfArrayList
-
-
     private var filter: FilterPdfAdmin? = null
+    private lateinit var topic: String
+    private lateinit var id: String
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderAdminPdf {
@@ -39,8 +48,9 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
     override fun onBindViewHolder(holder: ViewHolderAdminPdf, position: Int) {
         val currentData = pdfArrayList[position]
         val timestamp = currentData.timestamp
-        val topic = currentData.topic
+        topic = currentData.topic
         val pdfUrl = currentData.url
+        id = currentData.id
 
         val formattedDate = MyApplication.formatTimeStamp(timestamp)
         holder.dateTv.text = formattedDate
@@ -54,15 +64,96 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
             moreOptionDialogue(currentData, holder)
         }
 
+        holder.btnDownload.setOnClickListener {
+
+            downloadPdf(currentData, holder)
+
+        }
+
 
     }
+
+
+    private fun downloadPdf(currentData: ModelPdf, holder: ViewHolderAdminPdf) {
+        val url = currentData.url
+
+        val ref = FirebaseStorage.getInstance().getReferenceFromUrl(url)
+        ref.getBytes(5000000)
+            .addOnSuccessListener { bytes ->
+                saveToDownloads(bytes)
+
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(
+                    context,
+                    "Downloading Failed due to ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+    }
+
+    private fun saveToDownloads(bytes: ByteArray?) {
+        val nameWithExtension = "$topic.pdf"
+
+        try {
+            val downloadsFolder =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+
+            downloadsFolder.mkdirs()
+
+            val filePath = downloadsFolder.path + "/" + nameWithExtension
+            val out = FileOutputStream(filePath)
+            out.write(bytes)
+            out.close()
+            Toast.makeText(context, "$topic is downloaded successfully", Toast.LENGTH_SHORT)
+                .show()
+            incrementDownloadCount()
+
+        } catch (e: Exception) {
+            Log.d(TAG, "saveToDownloads: ${e.printStackTrace()}")
+        }
+    }
+
+    private fun incrementDownloadCount() {
+        val ref = FirebaseDatabase.getInstance().getReference("Notes")
+        ref.child(id)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var downloadCount = snapshot.child("downloadsCount").value.toString()
+                    if (downloadCount == "" || downloadCount == "null") {
+                        downloadCount = "0"
+                    }
+                    var newDownloadCount = downloadCount.toLong() + 1
+
+                    val hashMap: HashMap<String, Any> = HashMap()
+                    hashMap["downloadsCount"] = newDownloadCount
+
+                    val dbref = FirebaseDatabase.getInstance().getReference("Notes")
+                    dbref.child(id)
+                        .updateChildren(hashMap)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "onDataChange: Updated Downloads count ")
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "onDataChange: Download count Update Failed")
+                        }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+    }
+
 
     private fun moreOptionDialogue(
         currentData: ModelPdf,
         holder: PdfAdminAdapter.ViewHolderAdminPdf
     ) {
         val subjectId = currentData.subjectId
-        val topic = currentData.topic
+        topic = currentData.topic
         val url = currentData.url
 
         val options = arrayOf("Edit", "Delete")
@@ -101,6 +192,7 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
         val sizeTv: TextView = itemView.findViewById(R.id.sizeTv)
         val dateTv: TextView = itemView.findViewById(R.id.dateTv)
         val btnMore: ImageButton = itemView.findViewById(R.id.btn_more)
+        val btnDownload: ImageButton = itemView.findViewById(R.id.btn_download)
     }
 
 

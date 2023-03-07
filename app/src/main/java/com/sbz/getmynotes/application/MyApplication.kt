@@ -5,13 +5,17 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.sbz.getmynotes.util.Constants
 import java.util.*
 
 class MyApplication : Application() {
@@ -54,11 +58,33 @@ class MyApplication : Application() {
         }
 
 
-        fun loadPdfFromUrlSinglePAge(pdfUrl: String, pdfTitle: String, pagesTv: TextView?) {
+        fun loadPdfFromUrlSinglePage(
+            pdfUrl: String,
+            pdfTitle: String,
+            progressBar: ProgressBar,
+            pdfView: PDFView,
+            pagesTv: TextView?
+        ) {
             val ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl)
-            ref.metadata
-                .addOnSuccessListener { storageMetaData ->
-                    val bytes = storageMetaData.sizeBytes.toDouble()
+            ref.getBytes(Constants.MAX_BYTES_PDF)
+                .addOnSuccessListener { bytes ->
+
+                    pdfView.fromBytes(bytes)
+                        .defaultPage(0)
+                        .spacing(0)
+                        .swipeHorizontal(false)
+                        .enableSwipe(false)
+                        .onError { t ->
+                            progressBar.visibility = View.INVISIBLE
+                            Log.d(TAG, "loadPdfFromUrlSinglePage: ${t.message}")
+                        }
+                        .onPageError { page, t ->
+                            progressBar.visibility = View.INVISIBLE
+                            Log.d(TAG, "loadPdfFromUrlSinglePage: ${t.message}")
+                        }
+                        .onLoad { t ->
+
+                        }
 
 
                 }

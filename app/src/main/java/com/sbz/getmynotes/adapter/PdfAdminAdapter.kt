@@ -1,6 +1,7 @@
 package com.sbz.getmynotes.adapter
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Environment
@@ -20,6 +21,7 @@ import com.sbz.getmynotes.application.MyApplication
 import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.model.ModelPdf
 import com.sbz.getmynotes.ui.EditPdfActivity
+import com.sbz.getmynotes.util.Constants
 import java.io.FileOutputStream
 
 class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf>) :
@@ -29,6 +31,8 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
     companion object {
         const val TAG = "TITLE_EXCEPTION_ERROR"
     }
+
+    private var progressDialog: ProgressDialog? = null
 
     private val filterList: ArrayList<ModelPdf> = pdfArrayList
     private var filter: FilterPdfAdmin? = null
@@ -55,9 +59,13 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
         val formattedDate = MyApplication.formatTimeStamp(timestamp)
         holder.dateTv.text = formattedDate
         holder.pdfTopicNameTv.text = topic
+        holder.totalDownload.text = currentData.downloadsCount.toString()
+        holder.totalViews.text = currentData.viewCount.toString()
 
 //        MyApplication.loadSubject(subjectId, holder.subjectTv)
-        MyApplication.loadPdfFromUrlSinglePAge(pdfUrl, topic, null)
+
+//        Need to check this Not working!!
+//        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, topic, holder.progressBar, holder.pdfView, null)
         MyApplication.loadPdfSize(pdfUrl, topic, holder.sizeTv)
 
         holder.btnMore.setOnClickListener {
@@ -77,8 +85,14 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
     private fun downloadPdf(currentData: ModelPdf, holder: ViewHolderAdminPdf) {
         val url = currentData.url
 
+        progressDialog = ProgressDialog(context)
+        progressDialog?.setMessage("Downloading ${currentData.topic}...")
+        progressDialog?.setCancelable(false)
+        progressDialog?.show()
+
+
         val ref = FirebaseStorage.getInstance().getReferenceFromUrl(url)
-        ref.getBytes(5000000)
+        ref.getBytes(Constants.MAX_BYTES_PDF)
             .addOnSuccessListener { bytes ->
                 saveToDownloads(bytes)
 
@@ -193,6 +207,10 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
         val dateTv: TextView = itemView.findViewById(R.id.dateTv)
         val btnMore: ImageButton = itemView.findViewById(R.id.btn_more)
         val btnDownload: ImageButton = itemView.findViewById(R.id.btn_download)
+        val totalDownload: TextView = itemView.findViewById(R.id.tv_totalDownloads)
+        val totalViews: TextView = itemView.findViewById(R.id.tv_totalViews)
+//        val progressBar: ProgressBar = itemView.findViewById(R.id.pb_loading)
+//        val pdfView: PDFView = itemView.findViewById(R.id.pdf_view)
     }
 
 

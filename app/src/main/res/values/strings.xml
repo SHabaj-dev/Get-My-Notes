@@ -62,4 +62,8 @@
     <string name="please_wait">Please Wait...</string>
     <string name="add_pdf_button">Add Pdf Button</string>
     <string name="button_download">button Download</string>
+    <string name="total_downloads">Downloads</string>
+    <string name="total_views">Views</string>
+    <string name="_0">0</string>
+    <string name="button_to_read_the_current_pdf">Button To read the current PDF</string>
 </resources>

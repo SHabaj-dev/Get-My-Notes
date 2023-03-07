@@ -1,11 +1,11 @@
 package com.sbz.getmynotes.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,6 +23,7 @@ class PdfListActivity : AppCompatActivity() {
     private lateinit var pdfArrayList: ArrayList<ModelPdf>
     private lateinit var adapterPdfAdmin: PdfAdminAdapter
     private val TAG = "PDF_LIST_ACTIVITY"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

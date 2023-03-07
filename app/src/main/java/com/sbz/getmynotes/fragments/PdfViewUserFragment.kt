@@ -54,17 +54,17 @@ class PdfViewUserFragment : Fragment(R.layout.fragment_pdf_view_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         loadPdfList()
-
-
 
     }
 
     private fun loadPdfList() {
         pdfArrayList = ArrayList()
         subjectId = arguments?.getString("user_subject_model").toString().trim()
+
+        if (!isAdded) {
+            return
+        }
 
         val ref = FirebaseDatabase.getInstance().getReference("Notes")
         ref.orderByChild("subjectId").equalTo(subjectId)

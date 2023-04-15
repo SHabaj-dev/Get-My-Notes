@@ -1,11 +1,12 @@
 package com.sbz.getmynotes.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,6 +21,7 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         hideActionAndNavBar()
+        FirebaseApp.initializeApp(this)
         mAuth = FirebaseAuth.getInstance()
         Handler(Looper.getMainLooper()).postDelayed({
             checkUser()

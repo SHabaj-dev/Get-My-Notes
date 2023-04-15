@@ -41,7 +41,7 @@
 
         </LinearLayout>
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <!--<com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/shapeableImageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -51,7 +51,24 @@
             android:src="@drawable/person_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearlayout_actionBar" />-->
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/roundImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/person_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:riv_border_color="@color/home_20"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="75dp"
+            app:riv_oval="true"
             app:layout_constraintTop_toBottomOf="@+id/linearlayout_actionBar" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTil"
@@ -66,7 +83,7 @@
             app:boxStrokeColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/shapeableImageView">
+            app:layout_constraintTop_toBottomOf="@id/roundImageView">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_name"

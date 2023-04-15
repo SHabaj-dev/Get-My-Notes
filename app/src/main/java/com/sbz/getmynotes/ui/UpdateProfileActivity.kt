@@ -38,10 +38,10 @@ class UpdateProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val shapeApperanceModel = ShapeAppearanceModel.builder()
+        /*val shapeApperanceModel = ShapeAppearanceModel.builder()
             .setAllCorners(CornerFamily.ROUNDED, 225f)
             .build()
-        binding.shapeableImageView.shapeAppearanceModel = shapeApperanceModel
+        binding.shapeableImageView.shapeAppearanceModel = shapeApperanceModel*/
 
         mAuth = FirebaseAuth.getInstance()
         loadUserInfo()
@@ -55,7 +55,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         binding.btnUpdateInfo.setOnClickListener {
             validateData()
         }
-        binding.shapeableImageView.setOnClickListener {
+        binding.roundImageView.setOnClickListener {
             showImageAttachMenu()
 
         }
@@ -137,7 +137,7 @@ class UpdateProfileActivity : AppCompatActivity() {
 
     private fun showImageAttachMenu() {
 
-        val popupMenu = PopupMenu(this, binding.shapeableImageView)
+        val popupMenu = PopupMenu(this, binding.roundImageView)
         popupMenu.menu.add(Menu.NONE, 0, 0, "Camera")
         popupMenu.menu.add(Menu.NONE, 1, 1, "Gallery")
         popupMenu.show()
@@ -175,7 +175,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                 val data = result.data
 //                imageUri = data!!.data
 
-                binding.shapeableImageView.setImageURI(imageUri)
+                binding.roundImageView.setImageURI(imageUri)
             } else {
                 Toast.makeText(this@UpdateProfileActivity, "Cancelled", Toast.LENGTH_SHORT).show()
             }
@@ -199,7 +199,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                 val data = result.data
                 imageUri = data!!.data
 
-                binding.shapeableImageView.setImageURI(imageUri)
+                binding.roundImageView.setImageURI(imageUri)
             } else {
                 Toast.makeText(this@UpdateProfileActivity, "Cancelled", Toast.LENGTH_SHORT).show()
             }
@@ -223,7 +223,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                             .load(profileImage)
                             .placeholder(R.drawable.person_icon)
                             .centerCrop()
-                            .into(binding.shapeableImageView)
+                            .into(binding.roundImageView)
                     } catch (e: Exception) {
                         Log.d("GLIDE_ERROR", "onDataChange: ${e.message}")
                     }

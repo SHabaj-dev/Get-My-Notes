@@ -99,6 +99,10 @@ class LoginPage : AppCompatActivity() {
 
 
     private fun loginUser(e_mail: String, password: String) {
+        if (e_mail.isBlank() || password.isBlank()) {
+//            Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show()
+            return
+        }
         mAuth = FirebaseAuth.getInstance()
         mAuth.signInWithEmailAndPassword(e_mail, password)
             .addOnCompleteListener { task ->
@@ -108,7 +112,11 @@ class LoginPage : AppCompatActivity() {
 //                    finish()
                     checkUserType()
                 } else {
-                    Toast.makeText(this, "Authentication Failed!!\n Please Try Again.", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this,
+                        "Authentication Failed!!\n Please Try Again.",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     binding.pbLogin.visibility = View.GONE
                     binding.btnLogin.visibility = View.VISIBLE

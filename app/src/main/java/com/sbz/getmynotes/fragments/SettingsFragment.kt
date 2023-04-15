@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.firebase.auth.FirebaseAuth
@@ -29,7 +29,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private lateinit var universityName: EditText
     private var uName: String = ""
     private var uniName: String = ""
-    private lateinit var userDP: ShapeableImageView
+    private lateinit var userDP: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,10 +39,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val updateButton = view.findViewById<AppCompatButton>(R.id.btn_update_profile)
         val logOutButton = view.findViewById<AppCompatButton>(R.id.btn_logout)
 
-        val shapeApperanceModel = ShapeAppearanceModel.builder()
+        /*val shapeApperanceModel = ShapeAppearanceModel.builder()
             .setAllCorners(CornerFamily.ROUNDED, 225f)
             .build()
-        userDP.shapeAppearanceModel = shapeApperanceModel
+        userDP.shapeAppearanceModel = shapeApperanceModel*/
 
         mAuth = FirebaseAuth.getInstance()
         getDataFromDB()

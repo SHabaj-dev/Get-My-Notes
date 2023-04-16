@@ -125,13 +125,13 @@ class PdfUserAdapter(
 
         holder.btnRead.setOnClickListener {
             val intent = Intent(holder.btnRead.context, Viewpdf::class.java)
-            intent.putExtra("filename", modelPdf.topic)
-            intent.putExtra("fileurl", modelPdf.url)
+            intent.putExtra("pdfTopic", modelPdf.topic)
+            intent.putExtra("pdfId", modelPdf.id)
+            intent.putExtra("pdfUrl", modelPdf.url)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             holder.btnRead.context.startActivity(intent)
         }
 
-        //        Need to check this Not working!!
         MyApplication.loadPdfFromUrlSinglePage(
             pdfUrl,
             topic,

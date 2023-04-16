@@ -66,4 +66,5 @@
     <string name="total_views">Views</string>
     <string name="_0">0</string>
     <string name="button_to_read_the_current_pdf">Button To read the current PDF</string>
+    <string name="pdf_name">PDF Name</string>
 </resources>

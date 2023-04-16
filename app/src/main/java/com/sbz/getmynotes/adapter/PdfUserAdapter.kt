@@ -7,8 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.ImageButton
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -43,8 +49,8 @@ class PdfUserAdapter(
         val totalDownloads: TextView = itemView.findViewById(R.id.tv_totalDownloads)
         val totalViews: TextView = itemView.findViewById(R.id.tv_totalViews)
         val btnRead: ImageButton = itemView.findViewById(R.id.btn_read_pdf)
-//        val progressBar: ProgressBar = itemView.findViewById(R.id.pb_loading)
-//        val pdfView: PDFView = itemView.findViewById(R.id.pdf_view)
+        val progressBar: ProgressBar = itemView.findViewById(R.id.pdf_view_progress_bar)
+        val pdfView: PDFView = itemView.findViewById(R.id.pdv_view)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUserPdf {
@@ -77,7 +83,13 @@ class PdfUserAdapter(
 
         MyApplication.loadPdfSize(pdfUrl, topic, holder.sizeTv)
         //        Need to check this Not working!!
-//        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, topic, holder.progressBar, holder.pdfView, null)
+        MyApplication.loadPdfFromUrlSinglePage(
+            pdfUrl,
+            topic,
+            holder.progressBar,
+            holder.pdfView,
+            null
+        )
     }
 
     private fun downloadPdf(currentData: ModelPdf) {

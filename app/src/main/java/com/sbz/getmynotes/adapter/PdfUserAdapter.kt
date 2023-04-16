@@ -2,6 +2,7 @@ package com.sbz.getmynotes.adapter
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,16 +16,21 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.sbz.getmynotes.R
+import com.sbz.getmynotes.Viewpdf
 import com.sbz.getmynotes.application.MyApplication
 import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.filter.FilterUserPdf
 import com.sbz.getmynotes.model.ModelPdf
 import java.io.FileOutputStream
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 
 class PdfUserAdapter(
     val context: Context,
-    var pdfArrayList: ArrayList<ModelPdf>
+    var pdfArrayList: ArrayList<ModelPdf>,
+    /*options: FirebaseRecyclerOptions<ModelPdf>*/
 ) :
+    /*FirebaseRecyclerAdapter<ModelPdf, PdfUserAdapter.ViewHolderUserPdf>(options),*/
     RecyclerView.Adapter<PdfUserAdapter.ViewHolderUserPdf>(),
     Filterable {
 
@@ -52,16 +58,40 @@ class PdfUserAdapter(
         return ViewHolderUserPdf(view)
     }
 
+    /*override fun onBindViewHolder(holder: ViewHolderUserPdf, position: Int, model: ModelPdf) {
+        val currentData = pdfArrayList[position]
+        val uid=currentData.uid
+        val subjectId=currentData.subjectId
+        val url=currentData.url
+        val viewCount=currentData.viewCount
+        val downloadsCount=currentData.downloadsCount
+        val timestamp = currentData.timestamp
+
+
+        val modelPdf = ModelPdf(uid, id, topic, subjectId, url, timestamp, viewCount, downloadsCount)
+
+        holder.btnRead.setOnClickListener {
+            val intent = Intent(holder.btnRead.context, Viewpdf::class.java)
+            intent.putExtra("filename", modelPdf.topic)
+            intent.putExtra("fileurl", modelPdf.url)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            holder.btnRead.context.startActivity(intent)
+        }
+    }*/
+
     override fun getItemCount(): Int {
         return pdfArrayList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolderUserPdf, position: Int) {
+
         val currentData = pdfArrayList[position]
         val timestamp = currentData.timestamp
         topic = currentData.topic
         val pdfUrl = currentData.url
         id = currentData.id
+
+
 
         val formattedDate = MyApplication.formatTimeStamp(timestamp)
         holder.dateTv.text = formattedDate
@@ -75,7 +105,28 @@ class PdfUserAdapter(
 
 
 
+
         MyApplication.loadPdfSize(pdfUrl, topic, holder.sizeTv)
+
+       // val currentData = pdfArrayList[position]
+        val uid=currentData.uid
+        val subjectId=currentData.subjectId
+        val url=currentData.url
+        val viewCount=currentData.viewCount
+        val downloadsCount=currentData.downloadsCount
+        //val timestamp = currentData.timestamp
+
+
+        val modelPdf = ModelPdf(uid, id, topic, subjectId, url, timestamp, viewCount, downloadsCount)
+
+        holder.btnRead.setOnClickListener {
+            val intent = Intent(holder.btnRead.context, Viewpdf::class.java)
+            intent.putExtra("filename", modelPdf.topic)
+            intent.putExtra("fileurl", modelPdf.url)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            holder.btnRead.context.startActivity(intent)
+        }
+
         //        Need to check this Not working!!
 //        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, topic, holder.progressBar, holder.pdfView, null)
     }

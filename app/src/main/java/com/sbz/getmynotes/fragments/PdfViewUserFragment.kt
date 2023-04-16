@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,7 +29,10 @@ class PdfViewUserFragment : Fragment(R.layout.fragment_pdf_view_user) {
     private lateinit var searchText: TextView
     private lateinit var recyclerView: RecyclerView
     private var subjectId: String = ""
+    private lateinit var firebaseRecyclerOptions: FirebaseRecyclerOptions<ModelPdf>
 //    private var subjectName: String = ""
+    private lateinit var mAdapter: FirebaseRecyclerAdapter<ModelPdf, PdfUserAdapter.ViewHolderUserPdf>
+    private val mRecyclerView: RecyclerView? = null
 
 
     companion object {
@@ -61,10 +67,11 @@ class PdfViewUserFragment : Fragment(R.layout.fragment_pdf_view_user) {
     private fun loadPdfList() {
         pdfArrayList = ArrayList()
         subjectId = arguments?.getString("user_subject_model").toString().trim()
+        //firebaseRecyclerOptions=
 
-        if (!isAdded) {
+       /* if (!isAdded) {
             return
-        }
+        }*/
 
         val ref = FirebaseDatabase.getInstance().getReference("Notes")
         ref.orderByChild("subjectId").equalTo(subjectId)
@@ -92,6 +99,16 @@ class PdfViewUserFragment : Fragment(R.layout.fragment_pdf_view_user) {
                 }
             })
     }
+
+   /* override fun onStart() {
+        super.onStart()
+        mAdapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mAdapter.stopListening()
+    }*/
 
 
 }

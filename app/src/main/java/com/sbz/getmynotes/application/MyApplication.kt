@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.sbz.getmynotes.util.Constants.MAX_BYTES_PDF
 import java.util.Calendar
 import java.util.Locale
 
@@ -57,6 +58,38 @@ class MyApplication : Application() {
                 }
         }
 
+        fun loadPdfFromUrl(
+            pdfUrl: String,
+            progressBar: ProgressBar,
+            pdfView: PDFView
+        ) {
+            val ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl)
+            ref.getBytes(MAX_BYTES_PDF)
+                .addOnSuccessListener { bytes ->
+                    pdfView.fromBytes(bytes)
+                        .enableSwipe(true)
+                        .swipeHorizontal(false)
+                        .spacing(10)
+                        .onError { t ->
+                            progressBar.visibility = View.INVISIBLE
+                            Log.d(TAG, "loadPdfFromUrlSinglePage: ${t.message}")
+                        }
+                        .onPageError { page, t ->
+                            progressBar.visibility = View.INVISIBLE
+                            Log.d(TAG, "loadPdfFromUrlSinglePage: ${t.message}")
+                        }
+                        .onLoad { t ->
+                            progressBar.visibility = View.INVISIBLE
+//                            pagesTv?.text = "Pages: ${t}"
+                        }
+                        .load()
+                }
+                .addOnFailureListener { exception ->
+                    // Handle any errors here
+                    Log.e(TAG, "Failed to load PDF: ${exception.message}")
+                }
+        }
+
 
         fun loadPdfFromUrlSinglePage(
             pdfUrl: String,
@@ -66,7 +99,7 @@ class MyApplication : Application() {
             pagesTv: TextView?
         ) {
             val ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl)
-            ref.getBytes(Integer.MAX_VALUE.toLong())
+            ref.getBytes(MAX_BYTES_PDF)
                 .addOnSuccessListener { bytes ->
 
                     pdfView.fromBytes(bytes)

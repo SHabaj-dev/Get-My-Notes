@@ -28,8 +28,6 @@ import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.filter.FilterUserPdf
 import com.sbz.getmynotes.model.ModelPdf
 import java.io.FileOutputStream
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 
 class PdfUserAdapter(
     val context: Context,

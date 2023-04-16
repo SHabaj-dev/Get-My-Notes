@@ -80,6 +80,7 @@ dependencies {
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:8.0.2'
 
+    implementation("com.pspdfkit:pspdfkit:8.6.0")
 
 
 }

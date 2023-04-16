@@ -15,8 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.sbz.getmynotes.util.Constants
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 class MyApplication : Application() {
 
@@ -66,7 +66,7 @@ class MyApplication : Application() {
             pagesTv: TextView?
         ) {
             val ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl)
-            ref.getBytes(Constants.MAX_BYTES_PDF)
+            ref.getBytes(Integer.MAX_VALUE.toLong())
                 .addOnSuccessListener { bytes ->
 
                     pdfView.fromBytes(bytes)
@@ -83,8 +83,10 @@ class MyApplication : Application() {
                             Log.d(TAG, "loadPdfFromUrlSinglePage: ${t.message}")
                         }
                         .onLoad { t ->
-
+                            progressBar.visibility = View.INVISIBLE
+                            pagesTv?.text = "Pages: ${t}"
                         }
+                        .load()
 
 
                 }

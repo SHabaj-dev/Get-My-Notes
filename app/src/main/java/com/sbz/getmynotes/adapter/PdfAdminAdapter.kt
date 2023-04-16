@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -65,7 +66,7 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
 //        MyApplication.loadSubject(subjectId, holder.subjectTv)
 
 //        Need to check this Not working!!
-//        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, topic, holder.progressBar, holder.pdfView, null)
+        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, topic, holder.progressBar, holder.pdfView, null)
         MyApplication.loadPdfSize(pdfUrl, topic, holder.sizeTv)
 
         holder.btnMore.setOnClickListener {
@@ -209,8 +210,8 @@ class PdfAdminAdapter(val context: Context, var pdfArrayList: ArrayList<ModelPdf
         val btnDownload: ImageButton = itemView.findViewById(R.id.btn_download)
         val totalDownload: TextView = itemView.findViewById(R.id.tv_totalDownloads)
         val totalViews: TextView = itemView.findViewById(R.id.tv_totalViews)
-//        val progressBar: ProgressBar = itemView.findViewById(R.id.pb_loading)
-//        val pdfView: PDFView = itemView.findViewById(R.id.pdf_view)
+        val progressBar: ProgressBar = itemView.findViewById(R.id.pdf_view_progress_bar)
+        val pdfView: PDFView = itemView.findViewById(R.id.pdv_view)
     }
 
 

@@ -1,5 +1,12 @@
 <resources>
-      <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="margin_medium">10dp</dimen>
     <dimen name="margin_small">5dp</dimen>
+    <dimen name="padding_medium">15dp</dimen>
+    <dimen name="padding_small">10dp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="margin_big">20dp</dimen>
+    <dimen name="padding_extra_small">5dp</dimen>
+    <dimen name="text_size_main">18sp</dimen>
+    <dimen name="margin_large">40dp</dimen>
 </resources>

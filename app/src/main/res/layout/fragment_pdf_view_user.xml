@@ -9,6 +9,8 @@
         android:background="@color/white"
         tools:context=".fragments.PdfViewUserFragment">
 
+
+
         <EditText
             android:id="@+id/et_search_courses_user"
             android:layout_width="0dp"

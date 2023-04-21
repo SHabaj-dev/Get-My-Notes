@@ -28,7 +28,8 @@
                 android:layout_gravity="center"
                 android:layout_weight=".5"
                 android:background="@color/transparent"
-                android:padding="5dp"
+                android:contentDescription="@string/button_dexcription"
+                android:padding="@dimen/padding_extra_small"
                 android:src="@drawable/arrow_back" />
 
             <TextView
@@ -36,11 +37,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="3"
-                android:padding="5dp"
+                android:padding="@dimen/padding_extra_small"
                 android:text="@string/add_pdf"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_main"
                 android:textStyle="bold" />
 
             <ImageButton
@@ -51,6 +52,7 @@
                 android:layout_weight=".5"
                 android:padding="5dp"
                 android:background="@color/transparent"
+                android:contentDescription="@string/select_pdf_button"
                 android:src="@drawable/ic_attach_pdf" />
 
         </LinearLayout>
@@ -59,13 +61,14 @@
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:padding="5dp"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:importantForAccessibility="no"
             android:src="@drawable/upload_pdf"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:padding="@dimen/padding_extra_small"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -73,9 +76,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_big"
             android:hint="@string/topic_name"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/black"
@@ -88,12 +91,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_pdf_grey24"
-                android:drawablePadding="10dp"
+                android:drawablePadding="@dimen/padding_small"
                 android:inputType="textPersonName|textCapSentences"
-                android:padding="12dp"
+                android:padding="@dimen/padding_small"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_main" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -102,36 +105,36 @@
             android:id="@+id/et_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginEnd="@dimen/margin_big"
             android:background="@drawable/et_background"
-            android:drawableStart="@drawable/ic_subject"
-            android:drawableEnd="@drawable/ic_arrow_down"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/padding_small"
             android:gravity="center_vertical"
             android:hint="@string/select_subject"
             android:inputType="textPersonName|textCapSentences"
-            android:padding="13dp"
+            android:padding="@dimen/padding_small"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/background_color"
             app:layout_constraintEnd_toEndOf="@+id/subject_til"
             app:layout_constraintStart_toStartOf="@+id/subject_til"
+            app:drawableEndCompat="@drawable/ic_arrow_down"
+            app:drawableStartCompat="@drawable/ic_subject"
             app:layout_constraintTop_toBottomOf="@+id/subject_til" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_upload_pdf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/margin_big"
             android:background="@drawable/add_sub_btn_background"
-            android:padding="5dp"
+            android:padding="@dimen/padding_extra_small"
             android:text="@string/upload_pdf"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/home"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_main"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +144,7 @@
             android:id="@+id/pb_upload"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="@dimen/margin_big"
             android:indeterminate="true"
             android:indeterminateTint="@color/home"
             android:indeterminateTintMode="src_atop"

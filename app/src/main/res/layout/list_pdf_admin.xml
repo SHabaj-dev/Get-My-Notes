@@ -19,15 +19,16 @@
                 android:layout_width="100dp"
                 android:layout_height="120dp"
                 android:background="@color/gery"
+                android:layout_margin="@dimen/margin_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                    <com.github.barteksc.pdfviewer.PDFView
-                        android:id="@+id/pdv_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical" />
+                <com.github.barteksc.pdfviewer.PDFView
+                    android:id="@+id/pdv_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"/>
 
                     <ProgressBar
                         android:id="@+id/pdf_view_progress_bar"

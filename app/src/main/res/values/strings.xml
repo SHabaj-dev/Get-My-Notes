@@ -67,4 +67,8 @@
     <string name="_0">0</string>
     <string name="button_to_read_the_current_pdf">Button To read the current PDF</string>
     <string name="pdf_name">PDF Name</string>
+    <string name="downloading_file">Downloading file...</string>
+    <string name="cancel">Cancel</string>
+    <string name="button_dexcription">Back Button</string>
+    <string name="select_pdf_button">Select Pdf Button</string>
 </resources>

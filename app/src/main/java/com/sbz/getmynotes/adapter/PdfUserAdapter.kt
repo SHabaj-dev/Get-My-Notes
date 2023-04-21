@@ -22,11 +22,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.sbz.getmynotes.R
-import com.sbz.getmynotes.Viewpdf
 import com.sbz.getmynotes.application.MyApplication
 import com.sbz.getmynotes.filter.FilterPdfAdmin
 import com.sbz.getmynotes.filter.FilterUserPdf
 import com.sbz.getmynotes.model.ModelPdf
+import com.sbz.getmynotes.ui.Viewpdf
 import java.io.FileOutputStream
 
 class PdfUserAdapter(
@@ -126,7 +126,7 @@ class PdfUserAdapter(
         holder.btnRead.setOnClickListener {
             val intent = Intent(holder.btnRead.context, Viewpdf::class.java)
             intent.putExtra("pdfTopic", modelPdf.topic)
-            intent.putExtra("pdfId", modelPdf.id)
+            intent.putExtra("pdfId", id)
             intent.putExtra("pdfUrl", modelPdf.url)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             holder.btnRead.context.startActivity(intent)
@@ -141,11 +141,15 @@ class PdfUserAdapter(
         )
     }
 
+
+
     private fun downloadPdf(currentData: ModelPdf) {
         val url = currentData.url
 
         progressBar = ProgressDialog(context)
         progressBar?.setMessage("Downloading ${currentData.topic}...")
+        progressBar?.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+        progressBar?.max = 100
         progressBar?.setCancelable(false)
         progressBar?.show()
 
@@ -163,9 +167,12 @@ class PdfUserAdapter(
                     Toast.LENGTH_SHORT
                 ).show()
                 progressBar?.dismiss()
-
             }
     }
+
+
+//    private var isDownloading = true
+
 
     private fun saveToDownloads(bytes: ByteArray?) {
         val nameWithExtension = "$topic.pdf"

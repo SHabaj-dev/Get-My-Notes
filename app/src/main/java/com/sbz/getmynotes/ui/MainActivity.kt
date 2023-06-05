@@ -1,10 +1,13 @@
 package com.sbz.getmynotes.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,6 +24,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val window: Window = window
+        val decorView: View = window.decorView
+        val wic = WindowInsetsControllerCompat(window, decorView)
+        wic.isAppearanceLightStatusBars = true
+        window.statusBarColor = Color.WHITE
 
         window.statusBarColor = this.resources.getColor(R.color.home_20)
 
@@ -28,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         setFirstFragment()
         binding.tvSettings.visibility = View.GONE
-        binding.tvAllCourse.visibility=View.VISIBLE
+        binding.tvAllCourse.visibility = View.VISIBLE
 
 
         binding.homeLayout.setOnClickListener {
@@ -69,9 +77,9 @@ class MainActivity : AppCompatActivity() {
                 binding.tvSettings.visibility = View.VISIBLE
 
                 //setting the original params
-             /*   binding.ivUserProfile.layoutParams = originalParams1
-                binding.hiMsg.layoutParams = originalParams2
-                binding.tvUserName.layoutParams = originalParams3*/
+                /*   binding.ivUserProfile.layoutParams = originalParams1
+                   binding.hiMsg.layoutParams = originalParams2
+                   binding.tvUserName.layoutParams = originalParams3*/
 
 
 

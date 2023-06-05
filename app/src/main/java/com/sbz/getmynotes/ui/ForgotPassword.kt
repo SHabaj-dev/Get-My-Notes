@@ -1,9 +1,13 @@
 package com.sbz.getmynotes.ui
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.Window
 import android.widget.Toast
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.sbz.getmynotes.R
@@ -17,6 +21,13 @@ class ForgotPassword : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password)
+
+        val window: Window = window
+        val decorView: View = window.decorView
+        val wic = WindowInsetsControllerCompat(window, decorView)
+        wic.isAppearanceLightStatusBars = true
+        window.statusBarColor = Color.WHITE
+
         mAuth = FirebaseAuth.getInstance()
         binding.ivBackForgotPass.setOnClickListener { onBackPressed() }
 
@@ -25,7 +36,7 @@ class ForgotPassword : AppCompatActivity() {
         }
     }
 
-    private fun forgotPass(){
+    private fun forgotPass() {
         val email: String = binding.forgotEmail.text.toString().trim { it <= ' ' }
         if (email.isEmpty()) {
             Toast.makeText(this@ForgotPassword, "Please enter a email", Toast.LENGTH_SHORT)

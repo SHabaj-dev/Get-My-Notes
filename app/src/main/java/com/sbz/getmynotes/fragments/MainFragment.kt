@@ -50,6 +50,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
         userSubjectModel = ArrayList()
         myAdapter = UserSubjectAdapter(requireContext(), userSubjectModel, this)
         recyclerView.layoutManager = StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
+        myAdapter.sortByName()
         recyclerView.adapter = myAdapter
         getDataFromFirebase() // Call this function to get data from Firebase and update the adapter
 

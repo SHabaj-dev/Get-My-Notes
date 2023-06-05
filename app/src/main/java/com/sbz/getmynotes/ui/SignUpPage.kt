@@ -1,10 +1,13 @@
 package com.sbz.getmynotes.ui
 
 import android.app.ProgressDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -23,6 +26,12 @@ class SignUpPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up_page)
+
+        val window: Window = window
+        val decorView: View = window.decorView
+        val wic = WindowInsetsControllerCompat(window, decorView)
+        wic.isAppearanceLightStatusBars = true
+        window.statusBarColor = Color.WHITE
 
         binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 

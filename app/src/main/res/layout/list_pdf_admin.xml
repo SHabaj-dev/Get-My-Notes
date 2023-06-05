@@ -60,6 +60,11 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 app:layout_constraintEnd_toStartOf="@+id/btn_download"
                 app:layout_constraintStart_toEndOf="@id/relativeLayout"
                 app:layout_constraintTop_toTopOf="parent" />

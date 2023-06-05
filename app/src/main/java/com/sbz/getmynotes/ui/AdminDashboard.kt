@@ -2,12 +2,16 @@ package com.sbz.getmynotes.ui
 
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.view.Window
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -32,6 +36,13 @@ class AdminDashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_dashboard)
+
+        val window: Window = window
+        val decorView: View = window.decorView
+        val wic = WindowInsetsControllerCompat(window, decorView)
+        wic.isAppearanceLightStatusBars = true
+        window.statusBarColor = getColor(R.color.bar_color)
+
         subjectList = ArrayList()
         mAuth = FirebaseAuth.getInstance()
         checkUser()
@@ -60,15 +71,15 @@ class AdminDashboard : AppCompatActivity() {
             startActivity(Intent(this, AddSubjectActivity::class.java))
         }
 
-        binding.etSearchCourses.addTextChangedListener(object: TextWatcher{
+        binding.etSearchCourses.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                try{
+                try {
                     myAdapter.filter!!.filter(s)
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     Log.d("SEARCH_LOG", "onTextChanged: ${e.message}")
                 }
             }
@@ -83,7 +94,7 @@ class AdminDashboard : AppCompatActivity() {
     }
 
 
-    private fun getDataFromFirebase(){
+    private fun getDataFromFirebase() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("Subjects")
         myRef.addValueEventListener(object : ValueEventListener {

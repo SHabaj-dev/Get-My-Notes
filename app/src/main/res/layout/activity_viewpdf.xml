@@ -12,7 +12,7 @@
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/background_top_bar"
+            android:background="@color/home"
             android:orientation="horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"

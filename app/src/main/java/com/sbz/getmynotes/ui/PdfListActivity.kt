@@ -5,8 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -49,23 +51,23 @@ class PdfListActivity : AppCompatActivity() {
         loadPdfList()
 
 
-        binding.btnBackPdfAdmin.setOnClickListener{
+        binding.btnBackPdfAdmin.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
 
 
 
-        binding.etSearchCourses.addTextChangedListener(object: TextWatcher{
+        binding.etSearchCourses.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                try{
+                try {
                     adapterPdfAdmin.filter!!.filter(s)
 
-                }catch(e: Exception){
+                } catch (e: Exception) {
                     Log.d(TAG, "onTextChanged: ${e.message}")
                 }
             }
@@ -84,28 +86,29 @@ class PdfListActivity : AppCompatActivity() {
                 ModelPdf::class.java
             )
             .build()
-        adapter = PdfUserAdapter(applicationContext,pdfArrayList)
+        adapter = PdfUserAdapter(applicationContext, pdfArrayList)
         recview!!.adapter = adapter
 
 
     }
 
-    private fun loadPdfList(){
+    private fun loadPdfList() {
         pdfArrayList = ArrayList()
 
         val ref = FirebaseDatabase.getInstance().getReference("Notes")
         ref.orderByChild("subjectId").equalTo(subjectId)
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pdfArrayList.clear()
-                    for(ds in snapshot.children){
+                    for (ds in snapshot.children) {
                         val model = ds.getValue(ModelPdf::class.java)
-                        if(model != null){
+                        if (model != null) {
                             pdfArrayList.add(model)
                         }
                     }
                     binding.rvCourseName.hasFixedSize()
-                    binding.rvCourseName.layoutManager = StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
+                    binding.rvCourseName.layoutManager =
+                        StaggeredGridLayoutManager(1, LinearLayout.VERTICAL)
                     adapterPdfAdmin = PdfAdminAdapter(this@PdfListActivity, pdfArrayList)
                     binding.rvCourseName.adapter = adapterPdfAdmin
                     adapterPdfAdmin.notifyDataSetChanged()

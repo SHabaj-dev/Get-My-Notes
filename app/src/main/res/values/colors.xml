@@ -12,13 +12,14 @@
     <color name="magenta">#E83535</color>
     <color name="lightwhite">#b6d0e8</color>
 
-    <color name="transparent"> #00FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="accent">#B39CACD8</color>
-    <color name="yellow">  #FFDE03</color>
+    <color name="yellow">#FFDE03</color>
     <color name="home">#1194AA</color>
     <color name="settings">#AE7E0F</color>
     <color name="Delete">#F82424</color>
+    <color name="bar_color">#c7e2e6</color>
 
 
     <color name="home_20">#331194AA</color>

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.sbz.getmynotes.ContactUs
 import com.sbz.getmynotes.R
 import com.sbz.getmynotes.ui.LoginPage
 import com.sbz.getmynotes.ui.UpdateProfileActivity
@@ -30,12 +32,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private var uName: String = ""
     private var uniName: String = ""
     private lateinit var userDP: ImageView
+    private lateinit var contactUs: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userName = view.findViewById(R.id.tv_user_name_settings)
         universityName = view.findViewById(R.id.tv_collage_name_settings)
         userDP = view.findViewById(R.id.iv_settings_user)
+        contactUs = view.findViewById(R.id.tv_send_notes)
         val updateButton = view.findViewById<AppCompatButton>(R.id.btn_update_profile)
         val logOutButton = view.findViewById<AppCompatButton>(R.id.btn_logout)
 
@@ -52,11 +56,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             startActivity(intent)
         }
 
+        contactUs.setOnClickListener {
+            launchContactUsActivity()
+        }
+
 
         logOutButton.setOnClickListener {
             logOutCurrentUser()
         }
 
+    }
+
+    private fun launchContactUsActivity() {
+        val intent = Intent(requireContext(), ContactUs::class.java)
+        startActivity(intent)
     }
 
 
@@ -100,8 +113,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
 
     }
-
-
 
 
 }

@@ -33,6 +33,7 @@ class Viewpdf : AppCompatActivity() {
         }
 
         binding.tvPdfTitle.text = pdfTopic
+        binding.tvPdfTitle.isSelected = true
         MyApplication.loadPdfFromUrl(pdfUrl, binding.progressBar, binding.pdfView)
 
     }

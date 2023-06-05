@@ -41,6 +41,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_margin="10dp"
             android:src="@drawable/contact_us" />
 
         <androidx.cardview.widget.CardView
@@ -49,6 +50,7 @@
             android:layout_margin="20dp"
             android:background="@color/white"
             android:padding="5dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp">
 

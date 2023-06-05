@@ -34,7 +34,7 @@ class PdfUserAdapter(
     var pdfArrayList: ArrayList<ModelPdf>,
     /*options: FirebaseRecyclerOptions<ModelPdf>*/
 ) :
-    /*FirebaseRecyclerAdapter<ModelPdf, PdfUserAdapter.ViewHolderUserPdf>(options),*/
+/*FirebaseRecyclerAdapter<ModelPdf, PdfUserAdapter.ViewHolderUserPdf>(options),*/
     RecyclerView.Adapter<PdfUserAdapter.ViewHolderUserPdf>(),
     Filterable {
 
@@ -96,10 +96,10 @@ class PdfUserAdapter(
         id = currentData.id
 
 
-
         val formattedDate = MyApplication.formatTimeStamp(timestamp)
         holder.dateTv.text = formattedDate
         holder.pdfTopicName.text = topic
+        holder.pdfTopicName.isSelected = true
         holder.btnMore.visibility = View.GONE
         holder.totalDownloads.text = currentData.downloadsCount.toString()
         holder.totalViews.text = currentData.viewCount.toString()
@@ -112,16 +112,17 @@ class PdfUserAdapter(
 
         MyApplication.loadPdfSize(pdfUrl, topic, holder.sizeTv)
 
-       // val currentData = pdfArrayList[position]
-        val uid=currentData.uid
-        val subjectId=currentData.subjectId
-        val url=currentData.url
-        val viewCount=currentData.viewCount
-        val downloadsCount=currentData.downloadsCount
+        // val currentData = pdfArrayList[position]
+        val uid = currentData.uid
+        val subjectId = currentData.subjectId
+        val url = currentData.url
+        val viewCount = currentData.viewCount
+        val downloadsCount = currentData.downloadsCount
         //val timestamp = currentData.timestamp
 
 
-        val modelPdf = ModelPdf(uid, id, topic, subjectId, url, timestamp, viewCount, downloadsCount)
+        val modelPdf =
+            ModelPdf(uid, id, topic, subjectId, url, timestamp, viewCount, downloadsCount)
 
         holder.btnRead.setOnClickListener {
             val intent = Intent(holder.btnRead.context, Viewpdf::class.java)
@@ -142,7 +143,6 @@ class PdfUserAdapter(
     }
 
 
-
     private fun downloadPdf(currentData: ModelPdf) {
         val url = currentData.url
 
@@ -161,6 +161,7 @@ class PdfUserAdapter(
 
             }
             .addOnFailureListener { e ->
+                Log.d("DOWNLOAD_FAILED", "downloadPdf: ${e.message}  url -> ${url}")
                 Toast.makeText(
                     context,
                     "Downloading Failed due to ${e.message}",

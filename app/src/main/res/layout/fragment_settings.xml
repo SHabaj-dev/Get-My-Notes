@@ -28,13 +28,13 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/person_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:riv_border_color="@color/home_20"
         app:riv_border_width="2dp"
         app:riv_corner_radius="75dp"
-        app:riv_oval="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:riv_oval="true" />
 
 
     <LinearLayout
@@ -42,11 +42,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_settings_user">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -63,11 +63,11 @@
                 android:id="@+id/tv_user_name_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/person_icon"
+                android:drawablePadding="5dp"
                 android:enabled="false"
                 android:inputType="textPersonName"
                 android:singleLine="true"
-                android:drawableStart="@drawable/person_icon"
-                android:drawablePadding="5dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -79,13 +79,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="30dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_1">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -102,12 +102,12 @@
                 android:id="@+id/tv_collage_name_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_university"
+                android:drawablePadding="5dp"
                 android:enabled="false"
                 android:inputType="text"
                 android:singleLine="true"
                 android:text="@string/n_a"
-                android:drawableStart="@drawable/ic_university"
-                android:drawablePadding="5dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -132,15 +132,45 @@
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/log_out"
-        android:elevation="8dp"
         android:layout_marginEnd="30dp"
-        android:textColor="@color/magenta"
         android:background="@drawable/log_out_btn_background"
-        android:layout_marginBottom="30dp"
-        />
+        android:elevation="8dp"
+        android:text="@string/log_out"
+        android:textColor="@color/magenta"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_contact_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/want_to_send_your_notes"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_send_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_us"
+            android:textColor="@color/home"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_contact_us"
+            app:layout_constraintStart_toEndOf="@+id/tv_contact_us"
+            app:layout_constraintTop_toTopOf="@+id/tv_contact_us" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

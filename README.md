@@ -1,8 +1,9 @@
 # Get-My-Notes
 An Android Application to Get Notes Related to your subjects.
+Try our Application [here]()
 
 ## Features
-### Has Two Diffrent Modes User and Admin
+### Has Two Different Modes User and Admin
 ⭐ Admin
 - **Subject Management**: The admin can create, edit, and delete subjects in the app.
 - **PDF Upload**: The admin can upload PDFs to the app and assign them to specific subjects.
